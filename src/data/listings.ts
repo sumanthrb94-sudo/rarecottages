@@ -113,3 +113,11 @@ export function offersForCategory(category: CategorySlug): Offer[] {
   }
   return offers.filter((o) => o.category === category);
 }
+
+/** The cheapest offer listed under a service, for "From ₹X per night" lines. Undefined when nothing is listed. */
+export function startingPrice(category: CategorySlug): { price: number; unit: Offer['unit'] } | undefined {
+  const list = offersForCategory(category);
+  if (!list.length) return undefined;
+  const cheapest = list.reduce((a, b) => (b.price < a.price ? b : a));
+  return { price: cheapest.price, unit: cheapest.unit };
+}

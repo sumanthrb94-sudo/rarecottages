@@ -1,6 +1,4 @@
 import { IconBalloon } from '@tabler/icons-react';
-import { motion } from 'motion/react';
-import type { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { HeroCollage } from '../components/home/HeroCollage';
 import { HomeSearch } from '../components/home/HomeSearch';
@@ -17,27 +15,17 @@ import {
   IconMessageCircle,
   type Icon,
 } from '../components/ui/icons';
-import { FadeIn, Stagger, StaggerItem, TextEffect, spring } from '../components/ui/motion';
-import { Button, SectionHeader, ServiceIcon, ServiceTag } from '../components/ui/primitives';
+import { FadeIn, Stagger, StaggerItem, TextEffect } from '../components/ui/motion';
+import { Button, SectionHeader, ServiceTag } from '../components/ui/primitives';
 import { DESKTOP_QUERY, useMediaQuery } from '../components/ui/Sheet';
 import { site } from '../config/site';
-import { categories, unitLabel } from '../data/categories';
 import { getAddOn } from '../data/addons';
-import { offersForCategory, offersForProperty, properties } from '../data/listings';
+import { offersForProperty, properties } from '../data/listings';
 import { photos } from '../data/photos';
-import type { CategorySlug } from '../data/types';
 import { whatsappLink } from '../lib/enquiry';
 import { formatINR } from '../lib/format';
 import { usePageMeta } from '../lib/hooks';
 import './HomePage.css';
-
-/** Cheapest offer listed under a service, e.g. { price: 15000, per: 'per night' }. */
-function fromPrice(slug: CategorySlug) {
-  const offers = offersForCategory(slug);
-  if (!offers.length) return undefined;
-  const cheapest = offers.reduce((a, b) => (b.price < a.price ? b : a));
-  return { price: formatINR(cheapest.price), per: unitLabel[cheapest.unit].per };
-}
 
 /** Lowest price of an add-on, across its options; undefined when quoted on request. */
 function addOnFrom(id: string) {
@@ -67,8 +55,6 @@ const popular = properties
     return offer ? [{ property, offer }] : [];
   })
   .slice(0, POPULAR_LIMIT);
-
-const tilts = [-8, 7, -6, 8];
 
 const askWa = whatsappLink(
   site.whatsapp,
@@ -102,47 +88,6 @@ function Hero() {
           </div>
         )}
       </div>
-    </section>
-  );
-}
-
-function Occasions() {
-  return (
-    <section className="container home-section" aria-labelledby="home-occasions">
-      <SectionHeader id="home-occasions" title="Book by occasion" />
-      <Stagger as="ul" className="home-occasions" gap={0.07}>
-        {categories.map((c, i) => {
-          const from = fromPrice(c.slug);
-          return (
-            <StaggerItem as="li" key={c.slug}>
-              <motion.div whileTap={{ scale: 0.97 }} transition={spring} className="home-occasion__press">
-                <Link
-                  to={`/${c.slug}`}
-                  className="home-occasion"
-                  data-service={c.theme}
-                  style={{ '--home-tilt': `${tilts[i % tilts.length]}deg` } as CSSProperties}
-                >
-                  <div className="home-occasion__top">
-                    <span className="home-occasion__icon">
-                      <ServiceIcon slug={c.slug} size={48} />
-                    </span>
-                    <IconArrowUpRight size={20} stroke={1.75} className="home-occasion__arrow" aria-hidden="true" />
-                  </div>
-                  <div className="home-occasion__text">
-                    <h3 className="home-occasion__name">{c.name}</h3>
-                    <span className="home-occasion__hint">{c.hint}</span>
-                    {from && (
-                      <span className="home-occasion__price tabular">
-                        From {from.price} <span>{from.per}</span>
-                      </span>
-                    )}
-                  </div>
-                </Link>
-              </motion.div>
-            </StaggerItem>
-          );
-        })}
-      </Stagger>
     </section>
   );
 }
@@ -329,7 +274,6 @@ export function HomePage() {
     <div className="home">
       <Hero />
       <Popular />
-      <Occasions />
       <Extras />
       <Promos />
       <HowItWorks />

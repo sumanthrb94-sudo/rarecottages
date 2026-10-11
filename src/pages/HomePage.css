@@ -172,6 +172,30 @@
   color: var(--text);
 }
 
+/* A small price tag: "From", the price in the service colour, then the unit. Always three lines, so the
+   four tiles match at any width (a one-line "From ₹30,000" doesn't fit a 360px phone). */
+.home-picker__price {
+  display: grid;
+  justify-items: center;
+  gap: 1px;
+  margin-top: -2px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.home-picker__price strong {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--svc-text);
+}
+
+.home-picker__aside {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
 .home-search__fields {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -368,125 +392,6 @@
   font-size: 0.8rem;
   color: var(--text-2);
   white-space: nowrap;
-}
-
-/* ================================================================ occasions */
-.home-occasions {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.home-occasions > li {
-  min-width: 0;
-}
-
-.home-occasion__press {
-  height: 100%;
-}
-
-.home-occasion {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 20px;
-  height: 100%;
-  min-height: 176px;
-  padding: 16px;
-  border-radius: var(--r-lg);
-  background: var(--surface);
-  transition: background-color var(--dur-2) var(--ease-out);
-}
-
-.home-occasion:hover {
-  background: var(--surface-2);
-}
-
-.home-occasion__top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.home-occasion__icon {
-  display: inline-grid;
-  rotate: var(--home-tilt, -6deg);
-  transition:
-    rotate var(--dur-3) var(--ease-out),
-    scale var(--dur-3) var(--ease-out);
-}
-
-.home-occasion:hover .home-occasion__icon {
-  rotate: 0deg;
-  scale: 1.06;
-}
-
-.home-occasion__arrow {
-  flex: none;
-  color: var(--text-3);
-  transition:
-    color var(--dur-2),
-    translate var(--dur-2) var(--ease-out);
-}
-
-.home-occasion:hover .home-occasion__arrow {
-  color: var(--text);
-  translate: 2px -2px;
-}
-
-.home-occasion__text {
-  display: grid;
-  gap: 2px;
-  min-width: 0;
-}
-
-.home-occasion__name {
-  font-size: 1.05rem;
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.015em;
-}
-
-.home-occasion__hint {
-  font-size: 0.85rem;
-  color: var(--text-2);
-}
-
-.home-occasion__price {
-  margin-top: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--svc-text);
-}
-
-.home-occasion__price span {
-  display: block;
-  font-weight: 500;
-  color: var(--text-2);
-}
-
-@media (min-width: 900px) {
-  .home-occasions {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px;
-  }
-
-  .home-occasion {
-    min-height: 210px;
-    padding: 20px;
-  }
-
-  .home-occasion__name {
-    font-size: 1.2rem;
-  }
-
-  .home-occasion__price span {
-    display: inline;
-  }
 }
 
 /* ================================================================ popular */

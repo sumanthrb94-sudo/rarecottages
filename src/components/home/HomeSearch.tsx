@@ -3,7 +3,7 @@ import { useCallback, useId, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { site } from '../../config/site';
 import { categories, getCategory, unitLabel } from '../../data/categories';
-import { offersForCategory } from '../../data/listings';
+import { offersForCategory, startingPrice } from '../../data/listings';
 import type { CategorySlug } from '../../data/types';
 import { emptyFilters, filtersToParams, type Filters } from '../../lib/filters';
 import { formatINR } from '../../lib/format';
@@ -23,7 +23,7 @@ function extrasSummary(filters: Filters): string[] {
 }
 
 /**
- * The home search: pick a service, a date and a guest count, with pool, budget
+ * The home search: pick a service (each tile shows its starting price), a date and a guest count, with pool, budget
  * and distance tucked into a "More filters" sheet. Submitting opens the service page
  * with the filters in the URL.
  */
@@ -56,6 +56,7 @@ export function HomeSearch() {
           <div className="home-picker__grid">
             {categories.map((c) => {
               const on = c.slug === slug;
+              const from = startingPrice(c.slug);
               return (
                 <label key={c.slug} className={`home-picker__opt${on ? ' home-picker__opt--on' : ''}`} data-service={c.theme}>
                   <input
@@ -75,6 +76,13 @@ export function HomeSearch() {
                     <ServiceIcon slug={c.slug} size={40} />
                   </motion.span>
                   <span className="home-picker__name">{c.name}</span>
+                  {from && (
+                    <span className="home-picker__price tabular">
+                      <span className="home-picker__aside">From</span>
+                      <strong>{formatINR(from.price)}</strong>
+                      <span className="home-picker__aside">{unitLabel[from.unit].per}</span>
+                    </span>
+                  )}
                 </label>
               );
             })}
