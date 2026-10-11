@@ -74,7 +74,7 @@ To host it, add `VITE_DEMO=1` to a separate Vercel project, or a `pitch` preview
 
 ### Images
 
-`npm run images` turns source images in `images-src/<name>.<card|wide|square>.png` into the site's optimised WebP sizes in `public/images/`. AI-generated images for the demo follow **[docs/IMAGE-HANDOFF.md](docs/IMAGE-HANDOFF.md)**, which has prompts per image in `docs/image-shotlist.json`. Branded placeholders stand in until each render is done (`npm run images -- --check`).
+`npm run images` turns source images in `images-src/<name>.<card|wide|square>.png` into the site's optimised WebP sizes in `public/images/`. AI-generated images for the demo follow **[docs/IMAGE-HANDOFF.md](docs/IMAGE-HANDOFF.md)** (or paste the single prompt in [docs/ANTIGRAVITY-PROMPT.md](docs/ANTIGRAVITY-PROMPT.md) into Antigravity), which has prompts per image in `docs/image-shotlist.json`. Branded placeholders stand in until each render is done (`npm run images -- --check`).
 
 AI images never stand in for a real property unless the photo is marked `representative: true`, which shows a badge.
 
