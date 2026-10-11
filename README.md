@@ -94,9 +94,24 @@ src/
   styles/                 tokens.css (light/dark + service colours), base.css
 ```
 
-## Deploying
+## Deploying to Vercel
 
-It's a static single-page app, so any static host works once it rewrites unknown paths to `index.html`.
+The repo is ready for Vercel with zero configuration in the dashboard:
 
-- **Vercel**: import the repo. `vercel.json` already handles the rewrites.
-- **Netlify**: build command `npm run build`, publish directory `dist`. `public/_redirects` handles the rewrites.
+1. On [vercel.com/new](https://vercel.com/new), import the GitHub repository.
+2. Leave the settings as detected and click **Deploy**. `vercel.json` already sets:
+   - framework Vite
+   - `npm ci` and then `npm run build`, which typechecks then builds
+   - output directory `dist`
+   - Node 22, via `engines` in `package.json` and `.nvmrc`
+3. Every push to the production branch redeploys, and every other branch or PR gets a preview URL.
+
+`vercel.json` also sets:
+
+- **SPA routing.** Real files are served first, then every other path falls back to `index.html`, so deep links like `/spaces/seera-studio-space` work on refresh.
+- **Caching.** Hashed `/assets/*` are cached for a year (immutable), and `/images/*` for a week.
+- **Security headers.** `nosniff`, a strict referrer policy, no framing, and camera, mic and location turned off.
+
+From the command line: `npx vercel` for a preview, `npx vercel --prod` for production.
+
+Other static hosts work too. **Netlify** uses build command `npm run build` and publish directory `dist`, and `public/_redirects` handles the routing.
