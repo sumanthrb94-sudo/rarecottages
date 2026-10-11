@@ -135,6 +135,13 @@
   }
 }
 
+/* Detail pages on phones: back button + mark only, like an app's nested screen. */
+@media (max-width: 899px) {
+  .topbar__brand--nested .logo__word {
+    display: none;
+  }
+}
+
 /* ================================================================ tab bar (mobile) */
 .tabbar {
   position: fixed;
