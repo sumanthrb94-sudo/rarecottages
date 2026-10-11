@@ -328,8 +328,8 @@ export function HomePage() {
   return (
     <div className="home">
       <Hero />
-      <Occasions />
       <Popular />
+      <Occasions />
       <Extras />
       <Promos />
       <HowItWorks />
