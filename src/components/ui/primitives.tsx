@@ -86,16 +86,26 @@ export function IconButton({
   );
 }
 
-/** Selectable pill. Use `selected` for toggles/filters; pass `as="link"` styling via className on a Link instead. */
+/**
+ * Pill button. `selected` shows the filled state. By default the chip is a
+ * toggle (aria-pressed); pass `toggle={false}` for chips that open something
+ * (e.g. a filter sheet) but still show a filled state when a value is set.
+ */
 export function Chip({
   selected,
+  toggle = true,
   icon,
   children,
   className = '',
   ...rest
-}: { selected?: boolean; icon?: ReactNode; children: ReactNode } & ButtonHTMLAttributes<HTMLButtonElement>) {
+}: { selected?: boolean; toggle?: boolean; icon?: ReactNode; children: ReactNode } & ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
-    <button type="button" aria-pressed={selected} className={`chip${selected ? ' chip--on' : ''} ${className}`} {...rest}>
+    <button
+      type="button"
+      aria-pressed={toggle ? Boolean(selected) : undefined}
+      className={`chip${selected ? ' chip--on' : ''} ${className}`}
+      {...rest}
+    >
       {icon}
       <span>{children}</span>
     </button>

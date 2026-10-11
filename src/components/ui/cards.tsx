@@ -35,12 +35,15 @@ export function SpaceCard({
   category,
   query = '',
   priority = false,
+  sizes = '(min-width: 1024px) 380px, (min-width: 640px) 45vw, 80vw',
 }: {
   offer: Offer;
   property: Property;
   category: CategorySlug;
   query?: string;
   priority?: boolean;
+  /** Image sizes hint; override when the card is wider than a 3-column grid cell. */
+  sizes?: string;
 }) {
   const href = spaceHref(property, category, query);
   const offerCategory = getCategory(offer.category)!;
@@ -52,7 +55,7 @@ export function SpaceCard({
           <img
             src={property.card.src}
             srcSet={property.card.srcSet}
-            sizes="(min-width: 900px) 380px, 80vw"
+            sizes={sizes}
             width={property.card.width}
             height={property.card.height}
             alt={property.card.alt}
