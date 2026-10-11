@@ -70,9 +70,9 @@ export function OfferPicker({
           {state.offers.map((o) => {
             const slug = offerService(o, state.requested);
             const checked = o.id === state.offer.id;
-            const facts = [capacityText(o), o.durationHours ? `${o.durationHours} hrs` : undefined]
-              .filter(Boolean)
-              .join(' · ');
+            const facts = [capacityText(o), o.durationHours ? `${o.durationHours} hrs` : undefined].filter(
+              (f): f is string => Boolean(f),
+            );
             return (
               <motion.label
                 key={o.id}
@@ -102,7 +102,13 @@ export function OfferPicker({
                   {formatINR(o.price)}
                   <span> /{unitShort(o)}</span>
                 </span>
-                {facts && <span className="sp-offer__facts">{facts}</span>}
+                {facts.length > 0 && (
+                  <span className="sp-offer__facts">
+                    {facts.map((f) => (
+                      <span key={f}>{f}</span>
+                    ))}
+                  </span>
+                )}
               </motion.label>
             );
           })}
