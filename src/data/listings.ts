@@ -1,0 +1,105 @@
+import { photos } from './photos';
+import type { CategorySlug, Offer, Property } from './types';
+
+/**
+ * Every bookable place. Prices and capacities come from the client's mockups;
+ * fields the mockups did not specify are left out rather than guessed, and the
+ * UI shows "ask us" instead.
+ */
+export const properties: Property[] = [
+  {
+    id: 'br-farm-house',
+    name: 'B.R Farm House',
+    tagline: 'A private farm house built around a big blue pool.',
+    description:
+      'Spend the night by a sweeping, curved pool with plenty of deck space to lounge on. A relaxed farm house getaway for families and friends.',
+    area: 'Rajahmundry',
+    hasPool: true,
+    highlights: ['Swimming pool', 'Pool deck', 'Private stay'],
+    photo: photos.brFarm,
+  },
+  {
+    id: 'into-the-triangle',
+    name: 'Into The Triangle',
+    tagline: 'An A-frame villa with a glowing pool deck.',
+    description:
+      'A striking A-frame villa with a lit-up pool, sun loungers and a rooftop deck. Made for late-night pool sessions and stays with your crew.',
+    area: 'Rajahmundry',
+    hasPool: true,
+    highlights: ['Swimming pool', 'A-frame villa', 'Rooftop deck', 'Outdoor seating'],
+    photo: photos.triangle,
+  },
+  {
+    id: 'seera-studio-space',
+    name: 'Seera Studio Space',
+    tagline: 'Sculpted lawns for big celebrations and stays.',
+    description:
+      'Manicured lawns, white lion sculptures and a grand pergola entrance. Book it for a night stay, or take over the whole venue for weddings, receptions and functions of 100 to 250 guests.',
+    area: 'Rajahmundry',
+    // Listed with the swimming pool filter switched on in the client's Night Stay mockup.
+    hasPool: true,
+    highlights: ['Landscaped lawn', 'Photo-ready sculptures', 'Large gatherings'],
+    photo: photos.seeraWide,
+    thumb: photos.seeraSquare,
+  },
+  {
+    id: 'brimmies-all-day-cafe',
+    name: 'Brimmies All Day Cafe',
+    tagline: 'A cosy cafe for birthdays and small parties.',
+    description:
+      'An all-day cafe you can book by the hour for birthdays, surprises and small get-togethers. Pair it with a cake and our birthday package for a hassle-free party.',
+    area: 'Rajahmundry',
+    hasPool: false,
+    highlights: ['Cafe', 'Book by the hour'],
+    thumb: photos.brimmies,
+  },
+  {
+    // TODO(client): the mockups show this venue's photo without a name; rename as needed.
+    id: 'palm-grove',
+    name: 'The Palm Grove',
+    tagline: 'A tiled-roof cottage under the coconut palms.',
+    description:
+      'A traditional tiled-roof cottage surrounded by coconut palms. Book it by the hour for parties, or for the day for intimate events of up to 80 guests.',
+    area: 'Rajahmundry',
+    hasPool: false,
+    highlights: ['Coconut grove', 'Tiled-roof cottage'],
+    thumb: photos.palmGrove,
+  },
+];
+
+export const offers: Offer[] = [
+  { id: 'br-farm-night', propertyId: 'br-farm-house', category: 'night-stay', price: 15000, unit: 'night' },
+  { id: 'triangle-night', propertyId: 'into-the-triangle', category: 'night-stay', price: 18000, unit: 'night' },
+  { id: 'seera-night', propertyId: 'seera-studio-space', category: 'night-stay', price: 25000, unit: 'night' },
+
+  { id: 'brimmies-party', propertyId: 'brimmies-all-day-cafe', category: 'party-space', price: 2000, unit: 'hour', capacity: { min: 10, max: 25 } },
+  { id: 'palm-grove-party', propertyId: 'palm-grove', category: 'party-space', price: 3000, unit: 'hour', capacity: { min: 10, max: 80 } },
+
+  { id: 'seera-event', propertyId: 'seera-studio-space', category: 'event-space', price: 30000, unit: 'event', durationHours: 15, capacity: { min: 100, max: 250 } },
+  { id: 'palm-grove-event', propertyId: 'palm-grove', category: 'event-space', price: 35000, unit: 'event', capacity: { min: 10, max: 80 } },
+];
+
+const propertyById = new Map(properties.map((p) => [p.id, p]));
+
+export function getProperty(id: string): Property | undefined {
+  return propertyById.get(id);
+}
+
+export function getOffer(id: string): Offer | undefined {
+  return offers.find((o) => o.id === id);
+}
+
+export function offersForProperty(propertyId: string): Offer[] {
+  return offers.filter((o) => o.propertyId === propertyId);
+}
+
+/**
+ * Offers listed under a category. Hourly Stay also picks up every space that is
+ * priced by the hour, so it is never empty while hourly-priced spaces exist.
+ */
+export function offersForCategory(category: CategorySlug): Offer[] {
+  if (category === 'hourly-stay') {
+    return offers.filter((o) => o.category === 'hourly-stay' || o.unit === 'hour');
+  }
+  return offers.filter((o) => o.category === category);
+}

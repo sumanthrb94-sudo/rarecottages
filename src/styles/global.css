@@ -1,0 +1,499 @@
+/* ------------------------------------------------------------------ tokens */
+:root {
+  --ink: #0e1f1a;
+  --ink-soft: #44554f;
+  --cream: #f4f4f1;
+  --white: #ffffff;
+  --grey-card: #bdbdc0;
+  --whatsapp: #25d366;
+
+  --logo-red: #f10f10;
+  --logo-blue: #0c76fe;
+  --logo-green: #05ae0d;
+  --logo-yellow: #f2b30c;
+
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Antonio', 'Oswald', 'Arial Narrow', sans-serif;
+  --font-heavy: 'Archivo Black', 'Arial Black', sans-serif;
+  --font-script: 'Yellowtail', 'Brush Script MT', cursive;
+
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+  --shadow-sm: 0 2px 10px rgb(0 0 0 / 0.14);
+  --shadow: 0 18px 40px -12px rgb(0 0 0 / 0.38);
+  --container: 1180px;
+  --gutter: clamp(16px, 4vw, 32px);
+  --header-h: 68px;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /*
+   * Colour system: black & white is the shared brand (home, header, footer,
+   * add-ons, cars, about, contact). Each service owns one logo tile colour:
+   *   Night Stay = green, Hourly Stay = yellow, Party Space = blue, Event Space = red.
+   * --brand is the exact logo hue; --bg/--bg-deep are deep shades of it so white
+   * text stays readable; --accent is the button colour (logo hue, nudged darker
+   * where white text needs the contrast); --tint is a light tint for icons and
+   * small highlights on the dark background.
+   */
+  --bg: #141414;
+  --bg-deep: #0a0a0a;
+  --brand: #ffffff;
+  --accent: #ffffff;
+  --accent-ink: #111111;
+  --tint: #ffffff;
+  --name: #111111;
+}
+
+[data-theme='brand'] {
+  --bg: #141414;
+  --bg-deep: #0a0a0a;
+  --brand: #ffffff;
+  --accent: #ffffff;
+  --accent-ink: #111111;
+  --tint: #ffffff;
+  --name: #111111;
+}
+
+[data-theme='night'] {
+  --bg: #0e4a25;
+  --bg-deep: #072e16;
+  --brand: var(--logo-green);
+  --accent: var(--logo-green);
+  --accent-ink: #032611;
+  --tint: #8ee39a;
+  --name: #067a12;
+}
+
+[data-theme='hourly'] {
+  --bg: #5c4100;
+  --bg-deep: #382700;
+  --brand: var(--logo-yellow);
+  --accent: var(--logo-yellow);
+  --accent-ink: #2b1f00;
+  --tint: #ffe08a;
+  --name: #8a6200;
+}
+
+[data-theme='party'] {
+  --bg: #0b3d91;
+  --bg-deep: #06245a;
+  --brand: var(--logo-blue);
+  --accent: #0a6ae6;
+  --accent-ink: #ffffff;
+  --tint: #a9cbff;
+  --name: #0a4fb0;
+}
+
+[data-theme='event'] {
+  --bg: #7a0e0f;
+  --bg-deep: #4a0708;
+  --brand: var(--logo-red);
+  --accent: #e00d0e;
+  --accent-ink: #ffffff;
+  --tint: #ffb3b3;
+  --name: #a50b0c;
+}
+
+/* ------------------------------------------------------------------ reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--white);
+  background-color: var(--bg);
+  transition: background-color 0.4s var(--ease);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Soft light, shade and the sweeping band from the mockups' backgrounds. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(1100px 620px at 88% -8%, rgb(255 255 255 / 0.13), transparent 62%),
+    radial-gradient(900px 760px at -12% 38%, rgb(0 0 0 / 0.22), transparent 62%),
+    radial-gradient(700px 520px at 70% 110%, rgb(0 0 0 / 0.2), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 1200' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='%23fff'%3E%3Cpath stroke-opacity='.05' stroke-width='120' d='M-150 980C260 560 640 1260 1350 640'/%3E%3Cpath stroke-opacity='.04' stroke-width='36' d='M-200 330C260 40 760 620 1400 120'/%3E%3C/g%3E%3C/svg%3E")
+      center / 100% 100% no-repeat;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+  padding: 0;
+}
+
+:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* ------------------------------------------------------------------ layout */
+.container {
+  width: min(100% - 2 * var(--gutter), var(--container));
+  margin-inline: auto;
+}
+
+main {
+  display: block;
+  min-height: 60vh;
+}
+
+.section {
+  padding-block: clamp(40px, 7vw, 80px);
+}
+
+.section--tight {
+  padding-block: clamp(24px, 4vw, 40px);
+}
+
+.stack > * + * {
+  margin-top: var(--stack, 1rem);
+}
+
+.grid-2 {
+  display: grid;
+  gap: clamp(28px, 4vw, 40px);
+}
+
+@media (min-width: 860px) {
+  .grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ------------------------------------------------------------------ type */
+.eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.78);
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: 0.005em;
+}
+
+.h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.lead {
+  font-size: clamp(1rem, 1.6vw, 1.12rem);
+  color: rgb(255 255 255 / 0.86);
+  max-width: 60ch;
+}
+
+.muted {
+  color: rgb(255 255 255 / 0.72);
+}
+
+.script {
+  font-family: var(--font-script);
+  font-weight: 400;
+}
+
+/* Outlined block letters used for section titles ("PARTY SPACE"). */
+.outline-title {
+  font-family: var(--font-heavy);
+  font-size: clamp(2.2rem, 7vw, 4.2rem);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  text-shadow: 3px 3px 0 rgb(0 0 0 / 0.18);
+}
+
+@supports (-webkit-text-stroke: 2px white) {
+  .outline-title {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--white);
+  }
+}
+
+/* ------------------------------------------------------------------ buttons */
+.btn {
+  --btn-bg: var(--accent);
+  --btn-fg: var(--accent-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  min-height: 48px;
+  padding: 0.7em 1.4em;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-decoration: none;
+  text-align: center;
+  transition:
+    transform 0.2s var(--ease),
+    box-shadow 0.2s var(--ease),
+    background-color 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -8px rgb(0 0 0 / 0.45);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn svg {
+  width: 1.25em;
+  height: 1.25em;
+  flex: none;
+}
+
+.btn--light {
+  --btn-bg: var(--white);
+  --btn-fg: #111111;
+}
+
+.btn--whatsapp {
+  --btn-bg: var(--whatsapp);
+  --btn-fg: #053b1d;
+}
+
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--white);
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.7);
+}
+
+.btn--ghost:hover {
+  box-shadow: inset 0 0 0 1.5px var(--white);
+  background: rgb(255 255 255 / 0.08);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn--sm {
+  min-height: 40px;
+  padding: 0.5em 1.1em;
+  font-size: 0.92rem;
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.link-arrow:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.link-arrow svg {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+/* Slanted tag from the mockups ("Cake", "15,000/-"). */
+.slant {
+  --slant-bg: var(--accent);
+  --slant-fg: var(--accent-ink);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+  padding: 0.5em 1.6em;
+  color: var(--slant-fg);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.slant::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--slant-bg);
+  border-radius: 12px 6px 14px 6px;
+  transform: skewX(-28deg);
+  transition: transform 0.25s var(--ease), filter 0.2s;
+}
+
+a.slant:hover::before {
+  filter: brightness(1.08);
+  transform: skewX(-28deg) translateY(-2px);
+}
+
+/* ------------------------------------------------------------------ forms */
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field__label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgb(255 255 255 / 0.85);
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.65em 0.95em;
+  border: 1.5px solid rgb(255 255 255 / 0.75);
+  border-radius: var(--radius-sm);
+  background: rgb(255 255 255 / 0.06);
+  color: var(--white);
+  font-size: 1rem;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.input::placeholder {
+  color: rgb(255 255 255 / 0.6);
+}
+
+.input:hover {
+  border-color: var(--white);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--tint);
+  background: rgb(255 255 255 / 0.1);
+  box-shadow: 0 0 0 3px rgb(255 255 255 / 0.12);
+}
+
+.input[type='date'] {
+  color-scheme: dark;
+}
+
+textarea.input {
+  min-height: 110px;
+  resize: vertical;
+}
+
+select.input option {
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
