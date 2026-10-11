@@ -15,8 +15,8 @@
   position: relative;
 }
 
-/* On desktop the top bar already shows these four services with an active pill. */
-@media (min-width: 900px) {
+/* From 1200px the top bar already shows these four services with an active pill. */
+@media (min-width: 1200px) {
   .cat-switch {
     display: none;
   }

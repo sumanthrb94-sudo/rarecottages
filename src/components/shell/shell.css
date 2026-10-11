@@ -51,13 +51,18 @@
   border-radius: var(--r-sm);
 }
 
+/* Phones scale the wordmark with the screen so the brand, location chip and mode toggle share one row. */
+.topbar .logo__word {
+  height: clamp(16px, 4.6vw, 20px);
+}
+
 .topbar__back {
   /* optical alignment: the arrow sits on the content edge, like the logo */
   margin-left: -11px;
 }
 
-/* Phones: the mode toggle is the last item, so its icon lines up with the right content edge. */
-@media (max-width: 899px) {
+/* Phones and tablets: the mode toggle is the last item, so its icon lines up with the right content edge. */
+@media (max-width: 1199px) {
   .topbar__actions .theme-toggle {
     margin-right: -11px;
   }
@@ -74,10 +79,11 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 14px;
+  padding: 8px 12px;
   border-radius: var(--r-pill);
   font-size: 0.92rem;
   font-weight: 500;
+  white-space: nowrap;
   color: var(--text-2);
   transition: color var(--dur-2);
   isolation: isolate;
@@ -105,6 +111,7 @@
 
 .topbar__actions {
   display: flex;
+  flex: none;
   align-items: center;
   gap: 4px;
 }
@@ -115,6 +122,7 @@
   border-radius: var(--r-pill);
   font-size: 0.92rem;
   font-weight: 500;
+  white-space: nowrap;
   color: var(--text-2);
   transition: color var(--dur-2);
 }
@@ -139,7 +147,9 @@
   display: none;
 }
 
-@media (min-width: 900px) {
+/* The full desktop bar (four services, links, Enquire) needs about 1100px of content width;
+   narrower screens, tablets included, get the app layout: compact top bar plus bottom tab bar. */
+@media (min-width: 1200px) {
   .topbar__nav,
   .topnav__plain,
   .topbar__cta {
@@ -154,28 +164,25 @@
   .topbar__location {
     display: none;
   }
+  .topbar .logo {
+    gap: 10px;
+  }
   .topbar .logo__mark {
     height: 38px;
   }
   .topbar .logo__word {
-    height: 34px;
+    height: 22px;
   }
 }
 
-@media (max-width: 1100px) and (min-width: 900px) {
-  .topbar .logo__word {
-    display: none;
-  }
-}
-
-/* Detail pages on phones: back button + mark only, like an app's nested screen. */
-@media (max-width: 899px) {
+/* Detail pages on phones and tablets: back button + mark only, like an app's nested screen. */
+@media (max-width: 1199px) {
   .topbar__brand--nested .logo__word {
     display: none;
   }
 }
 
-/* ================================================================ tab bar (mobile) */
+/* ================================================================ tab bar (phones and tablets) */
 .tabbar {
   position: fixed;
   left: 0;
@@ -230,7 +237,7 @@
   padding-bottom: calc(var(--tabbar-h) + var(--safe-bottom) + 12px);
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1200px) {
   .tabbar {
     display: none;
   }

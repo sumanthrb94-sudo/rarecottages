@@ -26,7 +26,7 @@ npm run typecheck && npm test && npm run build   # run all three before committi
   - icons: Tabler, imported only through `ui/icons.ts`
   - buttons, chips, form fields, the bottom `Sheet`, `SpaceCard`, `PackageCard`
   - motion primitives
-- `src/components/shell/`: the top bar, mobile tab bar and footer.
+- `src/components/shell/`: the top bar, the tab bar (phones and tablets, below 1200px) and the footer.
 - `src/pages/`: one file per page, plus page-specific parts in `src/components/<page>/`.
 - `src/styles/tokens.css`: the light/dark tokens and service colours.
 
