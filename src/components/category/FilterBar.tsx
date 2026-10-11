@@ -78,7 +78,11 @@ export function FilterBar({
   const [sentinel, stuck] = useStuck();
   const active = activeFilterCount(filters);
   const set = (patch: Partial<Filters>) => onChange({ ...filters, ...patch });
-  const clear = () => onChange({ ...emptyFilters, date: filters.date });
+  const clear = () => {
+    onChange({ ...emptyFilters, date: filters.date });
+    // Clear disables itself, so hand focus to the main button instead of losing it.
+    requestAnimationFrame(() => document.querySelector<HTMLElement>('.cat-sheet__show')?.focus());
+  };
 
   // On desktop, jump straight to the field whose chip was tapped. (On phones this
   // would pop the keyboard, so the sheet just opens.)
