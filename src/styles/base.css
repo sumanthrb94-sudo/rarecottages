@@ -191,6 +191,8 @@ ol[role='list'] {
 
 /* App-like horizontal rail: bleeds to the screen edge on mobile, snaps per card. */
 .rail {
+  /* Keeps a rail's scrolled-away cards from widening the mobile layout viewport (Chrome Android zooms out otherwise). */
+  contain: paint;
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: var(--rail-item, min(78%, 320px));

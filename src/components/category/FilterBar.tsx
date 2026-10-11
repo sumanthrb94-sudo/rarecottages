@@ -16,7 +16,7 @@ function shortDate(iso: string) {
 }
 
 /** Filters the sheet's Clear button resets (the date is kept). */
-export function activeFilterCount(filters: Filters) {
+function activeFilterCount(filters: Filters) {
   return Number(Boolean(filters.guests)) + Number(filters.budget !== undefined) + Number(filters.pool);
 }
 
@@ -38,7 +38,7 @@ function Label({ text }: { text: string }) {
   );
 }
 
-/** Keeps a toggle the sticky bar's "stuck" look when it pins under the top bar. */
+/** True once the sticky filter bar has pinned itself under the top bar. */
 function useStuck() {
   const sentinel = useRef<HTMLDivElement>(null);
   const [stuck, setStuck] = useState(false);

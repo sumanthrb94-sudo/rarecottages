@@ -46,10 +46,12 @@ export function SpaceCard({
   sizes?: string;
 }) {
   const href = spaceHref(property, category, query);
-  const offerCategory = getCategory(offer.category)!;
+  // Hourly-priced spaces listed under Hourly Stay wear the Hourly Stay colour, as on the space page.
+  const tagSlug: CategorySlug = category === 'hourly-stay' && offer.unit === 'hour' ? 'hourly-stay' : offer.category;
+  const tagCategory = getCategory(tagSlug)!;
   const capacity = capacityText(offer);
   return (
-    <motion.article className="space-card" data-service={serviceTheme(offer.category)} whileTap={{ scale: 0.985 }}>
+    <motion.article className="space-card" data-service={serviceTheme(tagSlug)} whileTap={{ scale: 0.985 }}>
       <Link to={href} className="space-card__link" aria-label={`${property.name}, ${formatINR(offer.price)} per ${unitShort(offer)}`}>
         <div className="space-card__media">
           <img
@@ -62,7 +64,7 @@ export function SpaceCard({
             loading={priority ? 'eager' : 'lazy'}
             decoding="async"
           />
-          <ServiceTag slug={offer.category} label={offerCategory.name} className="space-card__tag" />
+          <ServiceTag slug={tagSlug} label={tagCategory.name} className="space-card__tag" />
         </div>
         <div className="space-card__body">
           <div className="space-card__row">

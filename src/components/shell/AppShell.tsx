@@ -1,10 +1,11 @@
 import { LayoutGroup, motion } from 'motion/react';
-import { useEffect } from 'react';
-import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Suspense, useEffect } from 'react';
+import { Link, NavLink, Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { mailHref, site, telHref } from '../../config/site';
 import { categories } from '../../data/categories';
 import type { CategorySlug } from '../../data/types';
 import { whatsappLink } from '../../lib/enquiry';
+import { filtersToParams, parseFilters } from '../../lib/filters';
 import {
   IconArrowLeft,
   IconBrandWhatsapp,
@@ -70,8 +71,11 @@ function ScrollToTop() {
 
 function TopBar() {
   const { pathname } = useLocation();
+  const [params] = useSearchParams();
   const navigate = useNavigate();
   const nested = pathname.startsWith('/spaces/');
+  // Carry the visitor's filters across services, like the mobile switcher does.
+  const query = SPACE_ROUTES.includes(pathname) ? filtersToParams(parseFilters(params)).toString() : '';
   return (
     <header className="topbar">
       <div className="container topbar__inner">
@@ -91,7 +95,7 @@ function TopBar() {
         <nav className="topbar__nav" aria-label="Services">
           <LayoutGroup id="topnav">
             {categories.map((c) => (
-              <NavLink key={c.slug} to={`/${c.slug}`} className="topnav__link" data-service={c.theme}>
+              <NavLink key={c.slug} to={{ pathname: `/${c.slug}`, search: query }} className="topnav__link" data-service={c.theme}>
                 {({ isActive }) => (
                   <>
                     <span className="topnav__dot" aria-hidden="true" />
@@ -274,9 +278,11 @@ export function AppShell() {
       <ScrollToTop />
       <TopBar />
       <main id="main" tabIndex={-1} className="app__main">
-        <PageTransition key={location.pathname}>
-          <Outlet />
-        </PageTransition>
+        <Suspense fallback={<div className="app__loading" aria-hidden="true" />}>
+          <PageTransition key={location.pathname}>
+            <Outlet />
+          </PageTransition>
+        </Suspense>
       </main>
       <Footer />
       {!nested && <TabBar />}

@@ -1,14 +1,17 @@
+import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { AppShell } from './components/shell/AppShell';
 import { categories } from './data/categories';
-import { AboutPage } from './pages/AboutPage';
-import { AddOnsPage } from './pages/AddOnsPage';
-import { CarsPage } from './pages/CarsPage';
-import { CategoryPage } from './pages/CategoryPage';
-import { ContactPage } from './pages/ContactPage';
 import { HomePage } from './pages/HomePage';
-import { NotFoundPage } from './pages/NotFoundPage';
-import { SpacePage } from './pages/SpacePage';
+
+// Home ships with the first load; every other page is fetched when it's visited.
+const CategoryPage = lazy(() => import('./pages/CategoryPage').then((m) => ({ default: m.CategoryPage })));
+const SpacePage = lazy(() => import('./pages/SpacePage').then((m) => ({ default: m.SpacePage })));
+const AddOnsPage = lazy(() => import('./pages/AddOnsPage').then((m) => ({ default: m.AddOnsPage })));
+const CarsPage = lazy(() => import('./pages/CarsPage').then((m) => ({ default: m.CarsPage })));
+const AboutPage = lazy(() => import('./pages/AboutPage').then((m) => ({ default: m.AboutPage })));
+const ContactPage = lazy(() => import('./pages/ContactPage').then((m) => ({ default: m.ContactPage })));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
 export function App() {
   return (

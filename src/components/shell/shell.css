@@ -9,6 +9,11 @@
   outline: none;
 }
 
+/* Holds the space while a lazily loaded page arrives, so the footer doesn't jump up. */
+.app__loading {
+  min-height: 100dvh;
+}
+
 /* ================================================================ top bar */
 .topbar {
   position: sticky;

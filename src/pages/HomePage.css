@@ -511,6 +511,7 @@
     padding-inline: 0;
     padding-bottom: 0;
     overflow: visible;
+    contain: none;
     scroll-snap-type: none;
   }
 }
