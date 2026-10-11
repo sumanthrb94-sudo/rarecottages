@@ -1,7 +1,7 @@
 export type CategorySlug = 'night-stay' | 'hourly-stay' | 'party-space' | 'event-space';
 
-/** 'brand' is the neutral black & white used by pages shared across services. */
-export type Theme = 'brand' | 'night' | 'hourly' | 'party' | 'event';
+/** Each service owns one colour of the logo: night = green, hourly = yellow, party = blue, event = red. */
+export type Theme = 'night' | 'hourly' | 'party' | 'event';
 
 /** How an offer is charged: per night, per hour, or a flat price for the event. */
 export type PriceUnit = 'night' | 'hour' | 'event';
@@ -24,10 +24,10 @@ export interface Property {
   area: string;
   hasPool: boolean;
   highlights: string[];
-  /** Wide, pill-shaped hero photo. */
-  photo?: Photo;
-  /** Square photo used on party / event venue cards. */
-  thumb?: Photo;
+  /** 4:3 photo for cards. */
+  card: Photo;
+  /** Wide (about 2:1) photo for the space page hero, when we have one. */
+  wide?: Photo;
 }
 
 export interface Offer {

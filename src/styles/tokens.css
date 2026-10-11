@@ -1,0 +1,127 @@
+/*
+ * Design tokens. Uber-style minimal: black, white and greys do the work;
+ * colour is reserved for the four services, each owning one logo tile:
+ *   Night Stay = green, Hourly Stay = yellow, Party Space = blue, Event Space = red.
+ *
+ * Modes: light (default) and dark, set on <html data-mode="…"> by lib/theme.tsx.
+ * Services: set data-service="night|hourly|party|event" on any element to get
+ *   --svc       the exact logo colour (fills: icon tiles, dots, active bars)
+ *   --svc-text  the same hue tuned for readable text in the current mode
+ *   --svc-soft  a faint tint for backgrounds
+ *   --svc-on    text colour on a solid --svc fill
+ */
+:root {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --bg-elev: #ffffff;
+  --surface: #f3f3f3;
+  --surface-2: #e8e8e8;
+  --surface-3: #dcdcdc;
+  --text: #000000;
+  --text-2: #4b4b4b;
+  --text-3: #727272;
+  --border: #e8e8e8;
+  --border-strong: #cbcbcb;
+  --inverse: #000000;
+  --on-inverse: #ffffff;
+  --overlay: rgb(0 0 0 / 0.45);
+  --glass: rgb(255 255 255 / 0.86);
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.06), 0 1px 3px rgb(0 0 0 / 0.04);
+  --shadow-2: 0 10px 30px -12px rgb(0 0 0 / 0.22);
+  --shadow-3: 0 30px 60px -20px rgb(0 0 0 / 0.35);
+
+  /* the four logo tiles */
+  --night: #05ae0d;
+  --hourly: #f2b30c;
+  --party: #0c76fe;
+  --event: #f10f10;
+  --night-text: #037c09;
+  --hourly-text: #8a6200;
+  --party-text: #0a5fd0;
+  --event-text: #c80b0c;
+  --whatsapp: #25d366;
+  --whatsapp-ink: #053b1d;
+
+  --font: 'Inter Variable', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-xl: 26px;
+  --r-pill: 999px;
+
+  --container: 1200px;
+  --gutter: clamp(16px, 4.5vw, 40px);
+  --topbar-h: 60px;
+  --tabbar-h: 64px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-1: 120ms;
+  --dur-2: 220ms;
+  --dur-3: 360ms;
+
+  /* service defaults so --svc is always defined */
+  --svc: var(--inverse);
+  --svc-text: var(--text);
+  --svc-soft: var(--surface);
+  --svc-on: var(--on-inverse);
+}
+
+:root[data-mode='dark'] {
+  color-scheme: dark;
+
+  --bg: #000000;
+  --bg-elev: #121212;
+  --surface: #1a1a1a;
+  --surface-2: #242424;
+  --surface-3: #303030;
+  --text: #ffffff;
+  --text-2: #b9b9b9;
+  --text-3: #8a8a8a;
+  --border: #242424;
+  --border-strong: #3a3a3a;
+  --inverse: #ffffff;
+  --on-inverse: #000000;
+  --overlay: rgb(0 0 0 / 0.65);
+  --glass: rgb(0 0 0 / 0.78);
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-2: 0 10px 30px -12px rgb(0 0 0 / 0.7);
+  --shadow-3: 0 30px 60px -20px rgb(0 0 0 / 0.8);
+
+  --night-text: #3fd447;
+  --hourly-text: #ffc83d;
+  --party-text: #5aa2ff;
+  --event-text: #ff5c5c;
+}
+
+[data-service='night'] {
+  --svc: var(--night);
+  --svc-text: var(--night-text);
+  --svc-soft: color-mix(in srgb, var(--night) 12%, transparent);
+  --svc-on: #ffffff;
+}
+
+[data-service='hourly'] {
+  --svc: var(--hourly);
+  --svc-text: var(--hourly-text);
+  --svc-soft: color-mix(in srgb, var(--hourly) 16%, transparent);
+  --svc-on: #241a00;
+}
+
+[data-service='party'] {
+  --svc: var(--party);
+  --svc-text: var(--party-text);
+  --svc-soft: color-mix(in srgb, var(--party) 12%, transparent);
+  --svc-on: #ffffff;
+}
+
+[data-service='event'] {
+  --svc: var(--event);
+  --svc-text: var(--event-text);
+  --svc-soft: color-mix(in srgb, var(--event) 11%, transparent);
+  --svc-on: #ffffff;
+}

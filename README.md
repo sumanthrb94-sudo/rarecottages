@@ -2,28 +2,48 @@
 
 **Stay . Relax . Celebrate.** The website for Rare Cottages: farm houses, villas, party spaces and event venues in and around Rajahmundry, with cakes, decor, photography and rental cars arranged alongside.
 
-Visitors pick a service, filter by date, guests, budget and swimming pool, open a space, build their booking (nights or hours, packages, add-ons) and send it as a ready-written WhatsApp message with an estimated total. No backend or payments are needed to go live.
+Visitors:
+1. pick a service
+2. filter by date, guests, budget and swimming pool
+3. open a space and build their booking (nights or hours, packages, add-ons)
+4. send it as a ready-written WhatsApp message with an estimated total.
 
-## Colour system
+No backend or payments are needed to go live.
 
-The logo's four coloured tiles each stand for one service. Black and white are the shared brand.
+## Design
 
-| Service | Logo tile | Used for |
+- **Uber-style minimal.** Black, white and greys do the work, with bold Inter type, generous space and rounded cards.
+- **Light and dark mode.** It follows the system setting by default, the sun/moon button in the top bar switches modes, and the choice is remembered. Tokens live in `src/styles/tokens.css`.
+- **App-like on phones.** The top bar shows the Rajahmundry location, and a bottom tab bar has Home, Spaces, Add-ons, Cars and Contact. Filters and the enquiry builder open as bottom sheets, cards sit in edge-to-edge rails, and a space page has its own bottom action bar.
+- **Motion** comes from [`motion`](https://motion.dev):
+  - fade-in-blur page and section reveals
+  - staggered lists
+  - spring taps
+  - sliding active indicators
+  - a rolling-digit price total
+
+  The recipes follow ibelick/motion-primitives, as used by the mint-motion skill. Reduced-motion settings are respected.
+- **Icons** are [Tabler Icons](https://tabler.io/icons), imported only through `src/components/ui/icons.ts`. Tabler has 5,900+ MIT icons in outline and filled styles, brand marks included.
+
+### Colour system
+
+Colour is reserved for the four services. Each owns one tile of the logo:
+
+| Service | Logo tile | `data-service` |
 | --- | --- | --- |
-| Night Stay | green `#05AE0D` | farm houses & villas, priced per night |
-| Hourly Stay | yellow `#F2B30C` | spaces bookable by the hour |
-| Party Space | blue `#0C76FE` | birthdays & get-togethers, cakes & packages |
-| Event Space | red `#F10F10` | weddings & functions, make-up, catering, photography |
-| Shared pages | black & white | home, add-ons, rental cars, about, contact, header & footer |
+| Night Stay | green `#05AE0D` | `night` |
+| Hourly Stay | yellow `#F2B30C` | `hourly` |
+| Party Space | blue `#0C76FE` | `party` |
+| Event Space | red `#F10F10` | `event` |
 
-Each service page, its listings, and every space opened from it take on that service's colour. Themes are CSS custom properties keyed by `data-theme` (`brand`, `night`, `hourly`, `party`, `event`) in `src/styles/global.css`:
+Put `data-service="…"` on any element to get its tokens:
 
-- `--brand` is the exact logo hue.
-- `--bg` / `--bg-deep` are deep shades of that hue, so white text stays readable.
-- `--accent` is the button colour.
-- `--tint` is a light tint for icons on dark backgrounds.
+- `--svc`: the logo colour, for fills like icon tiles, dots, switches and sliders
+- `--svc-text`: the same hue tuned for readable text in light and dark mode
+- `--svc-soft`: a faint tint
+- `--svc-on`: text on a solid fill
 
-Colour is never the only cue: every coloured element also carries the service's icon and name.
+Shared pages stay black and white. Colour is never the only cue: services always show their icon and name.
 
 ## Editing content
 
@@ -34,9 +54,9 @@ All content lives in typed data files. Edit them without touching any components
 | `src/config/site.ts` | Business name, **phone, WhatsApp number, email, Instagram**, service area, "Powered by" |
 | `src/data/listings.ts` | Spaces (`properties`) and their prices per service (`offers`) |
 | `src/data/addons.ts` | Add-ons (cake sizes, decor, photographer, make-up, catering, wedding photography partner) and packages |
-| `src/data/categories.ts` | The four services: names, blurbs, theme |
+| `src/data/categories.ts` | The four services: names, blurbs, colour |
 | `src/data/cars.ts` | Rental cars |
-| `public/images/` | Photos (wide shots at `-800.webp` and `-1600.webp`, wired up in `src/data/photos.ts`) |
+| `src/data/photos.ts`, `public/images/` | Photos: 4:3 cards (`-card-480/900.webp`) and wide heroes (`-wide-800/1400.webp`) |
 
 A space can be listed under several services with different prices. For example, Seera Studio Space is ₹25,000 per night as a Night Stay and ₹30,000 per event as an Event Space. Any offer priced per hour also appears under Hourly Stay.
 
@@ -60,16 +80,18 @@ npm run build      # production build in dist/
 npm run preview    # serve the production build
 ```
 
-Stack: React 19, React Router, TypeScript and Vite, with plain CSS (no UI framework) and lucide icons. Fonts are Antonio, Archivo Black, Poppins and Yellowtail from Google Fonts.
+Stack: React 19, React Router 7, TypeScript and Vite, with plain CSS, `motion`, Tabler Icons and self-hosted Inter (`@fontsource-variable/inter`).
 
 ```
 src/
-  config/site.ts        business details
-  data/                 spaces, offers, add-ons, packages, categories, cars
-  lib/                  filters, enquiry pricing + WhatsApp message, formatting, hooks
-  components/           header, footer, search controls, cards, carousel, enquiry builder
-  pages/                home, category (×4), space detail, add-ons, cars, about, contact, 404
-  styles/global.css     tokens, themes, base styles
+  config/site.ts          business details
+  data/                   spaces, offers, add-ons, packages, categories, cars, photos
+  lib/                    filters, enquiry pricing + WhatsApp message, formatting, theme (light/dark), hooks
+  components/ui/          design system: icons, buttons, chips, forms, sheet, cards, motion primitives
+  components/shell/       top bar, mobile tab bar, footer, page transitions
+  components/<page>/      page-specific pieces (home, category, space, info)
+  pages/                  home, service listing, space detail, add-ons, cars, about, contact, 404
+  styles/                 tokens.css (light/dark + service colours), base.css
 ```
 
 ## Deploying

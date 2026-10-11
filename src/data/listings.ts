@@ -16,7 +16,8 @@ export const properties: Property[] = [
     area: 'Rajahmundry',
     hasPool: true,
     highlights: ['Swimming pool', 'Pool deck', 'Private stay'],
-    photo: photos.brFarm,
+    card: photos.brFarmCard,
+    wide: photos.brFarmWide,
   },
   {
     id: 'into-the-triangle',
@@ -27,7 +28,8 @@ export const properties: Property[] = [
     area: 'Rajahmundry',
     hasPool: true,
     highlights: ['Swimming pool', 'A-frame villa', 'Rooftop deck', 'Outdoor seating'],
-    photo: photos.triangle,
+    card: photos.triangleCard,
+    wide: photos.triangleWide,
   },
   {
     id: 'seera-studio-space',
@@ -39,8 +41,8 @@ export const properties: Property[] = [
     // Listed with the swimming pool filter switched on in the client's Night Stay mockup.
     hasPool: true,
     highlights: ['Landscaped lawn', 'Photo-ready sculptures', 'Large gatherings'],
-    photo: photos.seeraWide,
-    thumb: photos.seeraSquare,
+    card: photos.seeraCard,
+    wide: photos.seeraWide,
   },
   {
     id: 'brimmies-all-day-cafe',
@@ -51,7 +53,7 @@ export const properties: Property[] = [
     area: 'Rajahmundry',
     hasPool: false,
     highlights: ['Cafe', 'Book by the hour'],
-    thumb: photos.brimmies,
+    card: photos.brimmiesCard,
   },
   {
     // TODO(client): the mockups show this venue's photo without a name; rename as needed.
@@ -63,7 +65,7 @@ export const properties: Property[] = [
     area: 'Rajahmundry',
     hasPool: false,
     highlights: ['Coconut grove', 'Tiled-roof cottage'],
-    thumb: photos.palmGrove,
+    card: photos.palmGroveCard,
   },
 ];
 

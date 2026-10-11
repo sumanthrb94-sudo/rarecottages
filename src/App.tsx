@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { Layout } from './components/Layout';
+import { AppShell } from './components/shell/AppShell';
 import { categories } from './data/categories';
 import { AboutPage } from './pages/AboutPage';
 import { AddOnsPage } from './pages/AddOnsPage';
@@ -13,7 +13,7 @@ import { SpacePage } from './pages/SpacePage';
 export function App() {
   return (
     <Routes>
-      <Route element={<Layout />}>
+      <Route element={<AppShell />}>
         <Route index element={<HomePage />} />
         {categories.map((c) => (
           <Route key={c.slug} path={c.slug} element={<CategoryPage key={c.slug} slug={c.slug} />} />

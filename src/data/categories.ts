@@ -10,8 +10,8 @@ export interface Category {
 }
 
 /**
- * The four ways to book. Colours follow the four tiles of the logo:
- * green for stays, yellow for hourly, blue for parties, red for events.
+ * The four ways to book. Each owns one tile colour of the logo (see `Theme`):
+ * green for Night Stay, yellow for Hourly Stay, blue for Party Space, red for Event Space.
  */
 export const categories: Category[] = [
   {

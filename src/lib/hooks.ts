@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { site } from '../config/site';
-import type { Theme } from '../data/types';
 import { filtersToParams, parseFilters, type Filters } from './filters';
 
 /** Filters kept in the URL, so searches can be shared and survive navigation. */
@@ -35,19 +34,4 @@ export function usePageMeta(title: string | undefined, description = DEFAULT_DES
     document.title = title ? `${title} | ${site.name}` : `${site.name} — ${site.tagline} | ${site.city}`;
     document.querySelector('meta[name="description"]')?.setAttribute('content', description);
   }, [title, description]);
-}
-
-/** Paints the page (and the overscroll area) in a category's colours. */
-export function usePageTheme(theme: Theme) {
-  useEffect(() => {
-    document.body.dataset.theme = theme;
-    const colours: Record<Theme, string> = {
-      brand: '#141414',
-      night: '#0e4a25',
-      hourly: '#5c4100',
-      party: '#0b3d91',
-      event: '#7a0e0f',
-    };
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', colours[theme]);
-  }, [theme]);
 }
