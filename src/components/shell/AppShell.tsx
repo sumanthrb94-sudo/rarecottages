@@ -47,8 +47,13 @@ function lastCategory(): CategorySlug {
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
   useEffect(() => {
-    if (hash) document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: 'smooth' });
-    else window.scrollTo({ top: 0 });
+    if (!hash) {
+      window.scrollTo({ top: 0 });
+      return;
+    }
+    // Wait for the page transition (which shifts content by a few px) to settle first.
+    const t = window.setTimeout(() => document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: 'smooth' }), 420);
+    return () => window.clearTimeout(t);
   }, [pathname, hash]);
   useEffect(() => {
     const slug = pathname.slice(1);
@@ -226,7 +231,7 @@ function Footer() {
             </li>
           </ul>
         </nav>
-        <div className="footer__col">
+        <div className="footer__col footer__col--contact">
           <h2 className="t-eyebrow">Get in touch</h2>
           <ul role="list">
             <li>

@@ -229,6 +229,16 @@
   }
 }
 
+.footer__col--contact {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 900px) {
+  .footer__col--contact {
+    grid-column: auto;
+  }
+}
+
 .footer__col {
   display: grid;
   align-content: start;

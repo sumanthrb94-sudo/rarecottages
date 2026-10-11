@@ -30,17 +30,16 @@ export function ServiceSwitcher({ current, query }: { current: CategorySlug; que
       el.scrollLeft = target;
     } else {
       el.scrollLeft = lastScrollLeft;
-      const pad = parseFloat(getComputedStyle(el).paddingLeft) || 0;
+      // the tab should sit clear of the edges, not just touch them
+      const pad = (parseFloat(getComputedStyle(el).paddingLeft) || 0) + 8;
       const left = tab.offsetLeft - el.scrollLeft;
       const fits = left >= pad && left + tab.offsetWidth <= el.clientWidth - pad;
-      console.log('DBG run', lastScrollLeft, target, fits);
       if (!fits) {
         glide = animate(el.scrollLeft, target, {
           type: 'spring',
           stiffness: 220,
           damping: 32,
           onUpdate: (v) => {
-            console.log('DBG upd', v, el.isConnected);
             el.scrollLeft = v;
           },
         });
@@ -52,7 +51,6 @@ export function ServiceSwitcher({ current, query }: { current: CategorySlug; que
     };
     el.addEventListener('scroll', onScroll, { passive: true });
     return () => {
-      console.log('DBG cleanup');
       glide?.stop();
       el.removeEventListener('scroll', onScroll);
     };
