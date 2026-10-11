@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { site } from '../config/site';
-import { filtersToParams, parseFilters, type Filters } from './filters';
+import { FILTER_PARAMS, filtersToParams, parseFilters, type Filters } from './filters';
 
 /** Filters kept in the URL, so searches can be shared and survive navigation. */
 export function useFilterParams(): [Filters, (next: Filters) => void] {
@@ -14,7 +14,7 @@ export function useFilterParams(): [Filters, (next: Filters) => void] {
           const merged = filtersToParams(next);
           // keep unrelated params (e.g. ?for=) intact
           for (const [key, value] of prev) {
-            if (!['date', 'guests', 'budget', 'pool'].includes(key)) merged.set(key, value);
+            if (!(FILTER_PARAMS as readonly string[]).includes(key)) merged.set(key, value);
           }
           return merged;
         },

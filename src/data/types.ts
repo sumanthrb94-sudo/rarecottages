@@ -28,6 +28,8 @@ export interface Property {
   tagline: string;
   description: string;
   area: string;
+  /** Road distance from Rajahmundry in km. Leave unset until known: it shows on cards and feeds the distance filter. */
+  distanceKm?: number;
   hasPool: boolean;
   highlights: string[];
   /** 4:3 photo for cards. */

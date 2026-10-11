@@ -21,7 +21,7 @@ npm run typecheck && npm test && npm run build   # run all three before committi
   - `samples.ts`: demo-only samples
   - `addons.ts`, `cars.ts`, `categories.ts`
   - `photos.ts`: the `card()`, `wide()` and `square()` photo helpers
-- `src/config/site.ts`: business contacts. The phone, WhatsApp and email are placeholders until the client confirms them.
+- `src/config/site.ts`: business contacts (WhatsApp and phone +91 90329 90099, info@rarecottages.in) and the Hyderabad HQ line.
 - `src/components/ui/`: the design system.
   - icons: Tabler, imported only through `ui/icons.ts`
   - buttons, chips, form fields, the bottom `Sheet`, `SpaceCard`, `PackageCard`

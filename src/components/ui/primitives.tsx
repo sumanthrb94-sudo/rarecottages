@@ -161,24 +161,28 @@ export function ServiceTag({ slug, label, className = '' }: { slug: CategorySlug
   );
 }
 
-/** Colour logo; the full lockup switches artwork for light / dark mode. */
+/**
+ * The client's logo, traced to vectors from their artwork (its lettering is a custom font, so it's drawn, not typed).
+ * mark: the four colour tiles. lockup: tiles + "rare COTTAGES", which takes the text colour in either mode.
+ * full: the stacked logo with the "Stay . Relax . Celebrate" bar, with artwork for each mode.
+ */
 export function Logo({ variant = 'mark', className = '' }: { variant?: 'mark' | 'lockup' | 'full'; className?: string }) {
   const { mode } = useTheme();
   if (variant === 'full') {
     return (
       <img
         className={className}
-        src={mode === 'dark' ? '/images/logo-dark.webp' : '/images/logo-light.webp'}
-        alt={`${site.name} — ${site.tagline}`}
-        width="480"
-        height="560"
+        src={`/images/logo-full-${mode}.svg`}
+        alt={`${site.name}: ${site.tagline}`}
+        width="500"
+        height="585"
       />
     );
   }
   return (
     <span className={`logo ${className}`}>
-      <img src="/images/logo-mark.webp" alt="" width="36" height="36" className="logo__mark" />
-      {variant === 'lockup' && <span className="logo__word">Rare Cottages</span>}
+      <img src="/images/logo-tiles.svg" alt="" width="41" height="34" className="logo__mark" />
+      {variant === 'lockup' && <span className="logo__word" aria-hidden="true" />}
     </span>
   );
 }

@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { useId, type CSSProperties, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes, type TextareaHTMLAttributes } from 'react';
-import { BUDGET_MAX, BUDGET_MIN, BUDGET_STEP } from '../../lib/filters';
+import { BUDGET_MAX, BUDGET_MIN, BUDGET_STEP, DISTANCE_OPTIONS } from '../../lib/filters';
 import { formatINR, todayISO } from '../../lib/format';
 import { IconCalendar, IconChevronDown, IconMinus, IconPlus } from './icons';
 import { spring } from './motion';
@@ -218,6 +218,51 @@ export function BudgetSlider({ value, onChange }: { value?: number; onChange: (v
       <div className="budget__scale t-caption tabular" aria-hidden="true">
         <span>{formatINR(BUDGET_MIN)}</span>
         <span>{formatINR(BUDGET_MAX)}+</span>
+      </div>
+    </div>
+  );
+}
+
+/** "How far from the city?" as one row of chips (a radio group). Undefined means any distance. */
+export function DistanceField({
+  city,
+  value,
+  onChange,
+}: {
+  city: string;
+  value?: number;
+  onChange: (value: number | undefined) => void;
+}) {
+  const name = useId();
+  const labelId = useId();
+  const options: (number | undefined)[] = [undefined, ...DISTANCE_OPTIONS];
+  return (
+    <div className="field" role="radiogroup" aria-labelledby={labelId}>
+      <div className="budget__head">
+        <span className="field__label" id={labelId}>
+          Distance from {city}
+        </span>
+        <span className="budget__value tabular" aria-hidden="true">
+          {value ? `Within ${value} km` : 'Any distance'}
+        </span>
+      </div>
+      <div className="distance__opts">
+        {options.map((km) => {
+          const on = value === km;
+          return (
+            <label key={km ?? 'any'} className={`chip distance__opt${on ? ' chip--on' : ''}`}>
+              <input type="radio" className="visually-hidden" name={name} checked={on} onChange={() => onChange(km)} />
+              {km ? (
+                <>
+                  <span className="visually-hidden">Within </span>
+                  {km} km
+                </>
+              ) : (
+                'Any'
+              )}
+            </label>
+          );
+        })}
       </div>
     </div>
   );

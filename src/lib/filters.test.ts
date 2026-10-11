@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { getProperty, offers, offersForCategory } from '../data/listings';
+import type { Offer, Property } from '../data/types';
 import { BUDGET_MAX, filtersToParams, matchesFilters, parseFilters, type Filters } from './filters';
 
 function matching(category: Parameters<typeof offersForCategory>[0], filters: Filters) {
@@ -10,13 +11,13 @@ function matching(category: Parameters<typeof offersForCategory>[0], filters: Fi
 
 describe('parseFilters / filtersToParams', () => {
   it('round-trips every filter through the URL', () => {
-    const filters: Filters = { date: '2026-10-10', guests: 20, budget: 18000, pool: true };
+    const filters: Filters = { date: '2026-10-10', guests: 20, budget: 18000, maxKm: 10, pool: true };
     expect(parseFilters(filtersToParams(filters))).toEqual(filters);
   });
 
   it('drops malformed and out-of-range values', () => {
-    const parsed = parseFilters(new URLSearchParams('date=10/oct/2026&guests=-3&budget=abc&pool=yes'));
-    expect(parsed).toEqual({ date: undefined, guests: undefined, budget: undefined, pool: false });
+    const parsed = parseFilters(new URLSearchParams('date=10/oct/2026&guests=-3&budget=abc&km=far&pool=yes'));
+    expect(parsed).toEqual({ date: undefined, guests: undefined, budget: undefined, maxKm: undefined, pool: false });
   });
 
   it('treats the top of the budget slider as "any budget"', () => {
@@ -37,6 +38,16 @@ describe('matchesFilters', () => {
   it('filters by guest capacity but keeps spaces with unknown capacity', () => {
     expect(matching('party-space', { pool: false, guests: 40 })).toEqual(['palm-grove-party']);
     expect(matching('night-stay', { pool: false, guests: 40 })).toHaveLength(3);
+  });
+
+  it('filters by distance from Rajahmundry but keeps spaces with no stated distance', () => {
+    const offer = { id: 'o', propertyId: 'p', category: 'night-stay', price: 1000, unit: 'night' } as Offer;
+    const at = (distanceKm?: number) => ({ id: 'p', hasPool: false, distanceKm }) as Property;
+    expect(matchesFilters(offer, at(4), { pool: false, maxKm: 5 })).toBe(true);
+    expect(matchesFilters(offer, at(5), { pool: false, maxKm: 5 })).toBe(true);
+    expect(matchesFilters(offer, at(12), { pool: false, maxKm: 5 })).toBe(false);
+    expect(matchesFilters(offer, at(12), { pool: false })).toBe(true);
+    expect(matchesFilters(offer, at(undefined), { pool: false, maxKm: 5 })).toBe(true);
   });
 
   it('shows hourly-priced spaces under Hourly Stay', () => {

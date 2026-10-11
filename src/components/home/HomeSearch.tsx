@@ -1,28 +1,30 @@
 import { AnimatePresence, LayoutGroup, motion } from 'motion/react';
 import { useCallback, useId, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { site } from '../../config/site';
 import { categories, getCategory, unitLabel } from '../../data/categories';
 import { offersForCategory } from '../../data/listings';
 import type { CategorySlug } from '../../data/types';
 import { emptyFilters, filtersToParams, type Filters } from '../../lib/filters';
 import { formatINR } from '../../lib/format';
-import { BudgetSlider, DateField, Stepper, Switch } from '../ui/forms';
+import { BudgetSlider, DateField, DistanceField, Stepper, Switch } from '../ui/forms';
 import { IconAdjustmentsHorizontal, IconPool, IconSearch } from '../ui/icons';
 import { spring } from '../ui/motion';
 import { Button, Chip, ServiceIcon } from '../ui/primitives';
 import { Sheet } from '../ui/Sheet';
 
-/** Short, human summary of the filters kept in the sheet, e.g. "Pool · Up to ₹20,000". */
+/** Short, human summary of the filters kept in the sheet, e.g. "Pool · Up to ₹20,000 · Within 10 km". */
 function extrasSummary(filters: Filters): string[] {
   const parts: string[] = [];
   if (filters.pool) parts.push('Pool');
   if (filters.budget !== undefined) parts.push(`Up to ${formatINR(filters.budget)}`);
+  if (filters.maxKm) parts.push(`Within ${filters.maxKm} km`);
   return parts;
 }
 
 /**
- * The home search: pick a service, a date and a guest count, with pool and
- * budget tucked into a "More filters" sheet. Submitting opens the service page
+ * The home search: pick a service, a date and a guest count, with pool, budget
+ * and distance tucked into a "More filters" sheet. Submitting opens the service page
  * with the filters in the URL.
  */
 export function HomeSearch() {
@@ -129,7 +131,7 @@ export function HomeSearch() {
           <div className="home-sheet__foot">
             <Button
               variant="ghost"
-              onClick={() => setFilters((f) => ({ ...f, pool: false, budget: undefined }))}
+              onClick={() => setFilters((f) => ({ ...f, pool: false, budget: undefined, maxKm: undefined }))}
               disabled={extras.length === 0}
             >
               Clear
@@ -151,6 +153,12 @@ export function HomeSearch() {
           <hr className="divider" />
           <BudgetSlider value={filters.budget} onChange={(budget) => setFilters((f) => ({ ...f, budget }))} />
           {budgetUnit && <p className="t-caption">Budget is compared with the price {budgetUnit}.</p>}
+          <hr className="divider" />
+          <DistanceField
+            city={site.city}
+            value={filters.maxKm}
+            onChange={(maxKm) => setFilters((f) => ({ ...f, maxKm }))}
+          />
         </div>
       </Sheet>
     </form>

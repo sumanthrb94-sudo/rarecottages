@@ -2,13 +2,14 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { emptyFilters, hasActiveFilters, type Filters } from '../../lib/filters';
 import { formatDate, formatINR, plural } from '../../lib/format';
-import { BudgetSlider, DateField, Stepper, Switch } from '../ui/forms';
-import { IconAdjustmentsHorizontal, IconCalendar, IconCurrencyRupee, IconPool, IconUsers } from '../ui/icons';
+import { site } from '../../config/site';
+import { BudgetSlider, DateField, DistanceField, Stepper, Switch } from '../ui/forms';
+import { IconAdjustmentsHorizontal, IconCalendar, IconCurrencyRupee, IconMapPin, IconPool, IconUsers } from '../ui/icons';
 import { SlidingNumber, easeOut } from '../ui/motion';
 import { Button, Chip } from '../ui/primitives';
 import { DESKTOP_QUERY, Sheet, useMediaQuery } from '../ui/Sheet';
 
-type Field = 'date' | 'guests' | 'budget' | 'all';
+type Field = 'date' | 'guests' | 'budget' | 'km' | 'all';
 
 /** "Sat, 17 Oct" this year, "Sat, 17 Oct 2027" otherwise. */
 function shortDate(iso: string) {
@@ -17,7 +18,12 @@ function shortDate(iso: string) {
 
 /** Filters the sheet's Clear button resets (the date is kept). */
 function activeFilterCount(filters: Filters) {
-  return Number(Boolean(filters.guests)) + Number(filters.budget !== undefined) + Number(filters.pool);
+  return (
+    Number(Boolean(filters.guests)) +
+    Number(filters.budget !== undefined) +
+    Number(Boolean(filters.maxKm)) +
+    Number(filters.pool)
+  );
 }
 
 /** Chip label that cross-fades when its text changes. */
@@ -89,7 +95,9 @@ export function FilterBar({
   useEffect(() => {
     if (!open || open === 'all' || !desktop) return;
     const t = window.setTimeout(() => {
-      document.querySelector<HTMLElement>(`[data-cat-field="${open}"] input`)?.focus();
+      // A radio group takes focus on its chosen option, like arrowing into it would.
+      const group = document.querySelector(`[data-cat-field="${open}"]`);
+      (group?.querySelector<HTMLElement>('input:checked') ?? group?.querySelector<HTMLElement>('input'))?.focus();
     }, 90);
     return () => window.clearTimeout(t);
   }, [open, desktop]);
@@ -158,6 +166,13 @@ export function FilterBar({
             filters.budget !== undefined,
             filters.budget !== undefined ? `Budget: up to ${formatINR(filters.budget)}` : 'Budget: any',
           )}
+          {sheetChip(
+            'km',
+            filters.maxKm ? `Within ${filters.maxKm} km` : 'Distance',
+            <IconMapPin size={18} stroke={1.75} />,
+            Boolean(filters.maxKm),
+            filters.maxKm ? `Distance: within ${filters.maxKm} km of ${site.city}` : 'Distance: any',
+          )}
           <Chip
             selected={filters.pool}
             icon={<IconPool size={18} stroke={1.75} />}
@@ -202,6 +217,10 @@ export function FilterBar({
           <hr className="divider" />
           <div className="cat-sheet__group" data-cat-field="budget">
             <BudgetSlider value={filters.budget} onChange={(budget) => set({ budget })} />
+          </div>
+          <hr className="divider" />
+          <div className="cat-sheet__group" data-cat-field="km">
+            <DistanceField city={site.city} value={filters.maxKm} onChange={(maxKm) => set({ maxKm })} />
           </div>
           <hr className="divider" />
           <Switch

@@ -31,6 +31,7 @@ function helpMessage(name: string, filters: Filters) {
   if (filters.date) parts.push(` on ${formatDate(filters.date)}`);
   if (filters.guests) parts.push(` for ${filters.guests} people`);
   if (filters.budget !== undefined) parts.push(`, budget up to ${formatINR(filters.budget)}`);
+  if (filters.maxKm) parts.push(`, within ${filters.maxKm} km of ${site.city}`);
   if (filters.pool) parts.push(', with a swimming pool');
   return `${parts.join('')}. Can you help?`;
 }

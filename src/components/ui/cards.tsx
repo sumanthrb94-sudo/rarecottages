@@ -76,7 +76,9 @@ export function SpaceCard({
             </p>
           </div>
           <p className="space-card__meta">
-            <span>{property.area}</span>
+            <span>
+              {property.distanceKm !== undefined ? `${property.distanceKm} km from ${site.city}` : property.area}
+            </span>
             {property.hasPool && (
               <span className="space-card__fact">
                 <IconPool size={15} stroke={1.75} aria-hidden="true" /> Pool

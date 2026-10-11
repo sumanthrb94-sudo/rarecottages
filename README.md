@@ -80,9 +80,9 @@ AI images never stand in for a real property unless the photo is marked `represe
 
 ### Before launch
 
-- [ ] Replace the placeholder phone, WhatsApp and email in `src/config/site.ts`. WhatsApp links go nowhere until this is done, and the dev server logs a warning.
 - [ ] Confirm the name of **The Palm Grove**. The mockups show this venue's photo without a name.
 - [ ] Add guest capacities for the night stays and the rental car fleet and rates. These weren't in the mockups, so the site shows "ask us" instead.
+- [ ] Add each real space's road distance from Rajahmundry (`distanceKm` in `src/data/listings.ts`). Until then the distance filter keeps them in every result and their cards show the area instead.
 - [ ] Confirm Seera Studio Space has a pool. It's shown in the client's Night Stay mockup with the pool filter on.
 
 ## Development

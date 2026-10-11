@@ -83,6 +83,10 @@ function factsFor(property: Property, offer: Offer): { icon: Icon; text: string 
 }
 
 function locationLine(property: Property) {
+  if (property.distanceKm !== undefined) {
+    const km = `${property.distanceKm} km from ${site.city}`;
+    return property.area === site.city ? km : `${property.area} · ${km}`;
+  }
   return property.area === site.city
     ? `${site.city} · within ${site.serviceRadiusKm} km`
     : `${property.area}, within ${site.serviceRadiusKm} km of ${site.city}`;

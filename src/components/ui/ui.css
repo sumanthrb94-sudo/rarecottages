@@ -219,14 +219,24 @@
 }
 
 .logo__mark {
-  width: 34px;
+  width: auto;
   height: 34px;
 }
 
+/* The traced "rare COTTAGES" wordmark, painted in the text colour through an SVG mask. */
 .logo__word {
-  font-weight: 700;
-  font-size: 1.12rem;
-  letter-spacing: -0.03em;
+  display: block;
+  height: 30px;
+  aspect-ratio: 1.63;
+  background: currentColor;
+  -webkit-mask: url('/images/logo-word.svg') center / contain no-repeat;
+  mask: url('/images/logo-word.svg') center / contain no-repeat;
+}
+
+@media (forced-colors: active) {
+  .logo__word {
+    background: CanvasText;
+  }
 }
 
 .section-header {
@@ -462,6 +472,25 @@
 }
 
 /* budget slider */
+/* distance: a radio group styled as one row of equal chips */
+.distance__opts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.distance__opt {
+  justify-content: center;
+  min-height: 44px;
+  padding-inline: 8px;
+  cursor: pointer;
+}
+
+.distance__opt:has(input:focus-visible) {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
 .budget__head {
   display: flex;
   justify-content: space-between;

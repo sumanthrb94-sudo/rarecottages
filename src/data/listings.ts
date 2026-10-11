@@ -6,6 +6,7 @@ import type { CategorySlug, Offer, Property } from './types';
  * fields the mockups did not specify are left out rather than guessed, and the
  * UI shows "ask us" instead.
  */
+// TODO(client): add each space's road distance from Rajahmundry as `distanceKm` so the distance filter covers it.
 const realProperties: Property[] = [
   {
     id: 'br-farm-house',

@@ -2,7 +2,7 @@ import { LayoutGroup, motion } from 'motion/react';
 import { Suspense, useEffect } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { DEMO } from '../../config/demo';
-import { mailHref, site, telHref } from '../../config/site';
+import { site } from '../../config/site';
 import { categories } from '../../data/categories';
 import type { CategorySlug } from '../../data/types';
 import { whatsappLink } from '../../lib/enquiry';
@@ -24,7 +24,7 @@ import {
   type Icon,
 } from '../ui/icons';
 import { PageTransition, spring } from '../ui/motion';
-import { Button, IconButton, Logo, ServiceIcon, ThemeToggle, serviceTheme } from '../ui/primitives';
+import { Button, IconButton, Logo, ThemeToggle, serviceTheme } from '../ui/primitives';
 import './shell.css';
 
 const SPACE_ROUTES = categories.map((c) => `/${c.slug}`);
@@ -116,6 +116,9 @@ function TopBar() {
           <NavLink to="/rental-cars" className="topnav__plain">
             Cars
           </NavLink>
+          <NavLink to="/contact" className="topnav__plain">
+            Contact
+          </NavLink>
           <span className="topbar__location" title={`We serve ${site.serviceArea}`}>
             <IconMapPin size={16} stroke={1.75} aria-hidden="true" />
             {site.city}
@@ -194,69 +197,13 @@ function TabBar() {
   );
 }
 
+/** One quiet line: the client asked to drop the link columns, which repeated the top bar, tab bar and pages. */
 function Footer() {
   return (
     <footer className="footer">
-      <div className="container footer__grid">
-        <div className="footer__brand">
-          <Logo variant="lockup" />
-          <p className="t-small">
-            Farm houses, villas, party and event spaces in {site.city}, with cakes, decor and photography arranged for
-            you.
-          </p>
-          <p className="t-eyebrow">{site.tagline}</p>
-        </div>
-        <nav aria-label="Spaces" className="footer__col">
-          <h2 className="t-eyebrow">Spaces</h2>
-          <ul role="list">
-            {categories.map((c) => (
-              <li key={c.slug}>
-                <Link to={`/${c.slug}`} className="footer__svc">
-                  <ServiceIcon slug={c.slug} size={22} />
-                  {c.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <nav aria-label="More" className="footer__col">
-          <h2 className="t-eyebrow">More</h2>
-          <ul role="list">
-            <li>
-              <Link to="/add-ons">Cake, decor &amp; photos</Link>
-            </li>
-            <li>
-              <Link to="/rental-cars">Rental cars</Link>
-            </li>
-            <li>
-              <Link to="/about">About us</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact</Link>
-            </li>
-          </ul>
-        </nav>
-        <div className="footer__col footer__col--contact">
-          <h2 className="t-eyebrow">Get in touch</h2>
-          <ul role="list">
-            <li>
-              <a href={generalWa} target="_blank" rel="noreferrer">
-                WhatsApp
-              </a>
-            </li>
-            <li>
-              <a href={telHref}>{site.phoneDisplay}</a>
-            </li>
-            <li>
-              <a href={mailHref}>{site.email}</a>
-            </li>
-            <li className="t-small">{site.serviceArea}</li>
-          </ul>
-        </div>
-      </div>
       <div className="container footer__bottom t-caption">
         <span>
-          © {new Date().getFullYear()} {site.name}, {site.city}
+          © {new Date().getFullYear()} {site.name}, {site.hq}
         </span>
         <span>
           Powered by: <strong>{site.poweredBy}</strong>

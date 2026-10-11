@@ -4,8 +4,8 @@ import type { Car, Offer, Package, Property } from './types';
 /**
  * Sample catalogue for pitch / demo builds only (see src/config/demo.ts).
  *
- * These spaces, cars and packages are illustrative: names, prices and
- * capacities are placeholders that show how the product scales, not signed
+ * These spaces, cars and packages are illustrative: names, prices,
+ * capacities and distances are placeholders that show how the product scales, not signed
  * inventory. Every item is flagged `sample: true` and its photos
  * `representative: true`, so the UI badges them as "Sample".
  *
@@ -29,6 +29,7 @@ export const sampleProperties: Property[] = [
   sampleProperty({
     id: 'sample-riverbend-villa',
     name: 'Riverbend Villa',
+    distanceKm: 12,
     tagline: 'A riverside villa with an infinity pool and a sunset deck.',
     description:
       'A four-bedroom villa on the Godavari with an infinity pool that faces the river, a sunset deck and an open lawn for bonfire nights.',
@@ -39,6 +40,7 @@ export const sampleProperties: Property[] = [
   sampleProperty({
     id: 'sample-palm-haven',
     name: 'Palm Haven Farm Stay',
+    distanceKm: 18,
     tagline: 'A coconut-farm stay with a private pool and hammocks.',
     description:
       'Wake up among coconut palms in a tiled-roof farmhouse with a private pool, hammocks and a courtyard made for long lunches.',
@@ -49,6 +51,7 @@ export const sampleProperties: Property[] = [
   sampleProperty({
     id: 'sample-sunset-glasshouse',
     name: 'Sunset Glasshouse',
+    distanceKm: 9,
     tagline: 'A glass-walled cottage for slow mornings and quiet nights.',
     description: 'A glass-walled cottage in a garden of frangipani, with a fire pit, a reading nook and a deck for stargazing.',
     hasPool: false,
@@ -58,6 +61,7 @@ export const sampleProperties: Property[] = [
   sampleProperty({
     id: 'sample-azure-pool-lounge',
     name: 'Azure Pool Lounge',
+    distanceKm: 4,
     tagline: 'A poolside lounge you can book by the hour.',
     description: 'A shaded poolside lounge with sun loungers, a snack bar and a music system, booked by the hour for small groups.',
     hasPool: true,
@@ -67,6 +71,7 @@ export const sampleProperties: Property[] = [
   sampleProperty({
     id: 'sample-skyline-deck',
     name: 'Skyline Rooftop Deck',
+    distanceKm: 2,
     tagline: 'A rooftop deck under fairy lights, by the hour.',
     description: 'An open rooftop with string lights, lounge seating and a view over the city: for get-togethers, surprises and small parties.',
     hasPool: false,
@@ -76,6 +81,7 @@ export const sampleProperties: Property[] = [
   sampleProperty({
     id: 'sample-lantern-garden',
     name: 'Lantern Garden Cafe',
+    distanceKm: 5,
     tagline: 'A garden cafe strung with lanterns, for birthdays.',
     description: 'A leafy garden cafe with paper lanterns and long tables, ready for birthdays and surprise parties with cake and decor.',
     hasPool: false,
@@ -85,6 +91,7 @@ export const sampleProperties: Property[] = [
   sampleProperty({
     id: 'sample-neon-room',
     name: 'The Neon Room',
+    distanceKm: 3,
     tagline: 'A party hall with a DJ booth and a dance floor.',
     description: 'An indoor party hall with neon accents, a DJ booth, a dance floor and a stage for the cake cutting.',
     hasPool: false,
@@ -94,6 +101,7 @@ export const sampleProperties: Property[] = [
   sampleProperty({
     id: 'sample-riverfront-lawns',
     name: 'Riverfront Lawns',
+    distanceKm: 14,
     tagline: 'Sprawling lawns on the river for grand weddings.',
     description: 'Manicured lawns along the river with space for a mandap, a reception stage and dining for large weddings.',
     hasPool: false,
@@ -103,6 +111,7 @@ export const sampleProperties: Property[] = [
   sampleProperty({
     id: 'sample-heritage-courtyard',
     name: 'Heritage Courtyard',
+    distanceKm: 25,
     tagline: 'A pillared courtyard for haldi, sangeeth and receptions.',
     description: 'A traditional pillared courtyard with brass lamps and a central lawn, styled for haldi, mehendi and sangeeth nights.',
     hasPool: false,
