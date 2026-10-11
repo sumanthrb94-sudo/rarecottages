@@ -87,6 +87,13 @@
   border-radius: var(--r-sm);
 }
 
+/* Touch screens: every button keeps a 44px target. */
+@media (pointer: coarse) {
+  .btn--sm {
+    min-height: 44px;
+  }
+}
+
 .btn--lg {
   min-height: 56px;
   padding: 0 26px;
@@ -101,8 +108,8 @@
 .icon-btn {
   display: inline-grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--r-pill);
   color: var(--text);
   transition:
@@ -363,6 +370,7 @@
 .stepper__input {
   width: 100%;
   max-width: 70px;
+  min-height: 44px;
   border: 0;
   background: transparent;
   text-align: center;

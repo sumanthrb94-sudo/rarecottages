@@ -43,12 +43,24 @@
 }
 
 .topbar__brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  min-width: 44px;
   margin-right: auto;
   border-radius: var(--r-sm);
 }
 
 .topbar__back {
-  margin-left: -8px;
+  /* optical alignment: the arrow sits on the content edge, like the logo */
+  margin-left: -11px;
+}
+
+/* Phones: the mode toggle is the last item, so its icon lines up with the right content edge. */
+@media (max-width: 899px) {
+  .topbar__actions .theme-toggle {
+    margin-right: -11px;
+  }
 }
 
 .topbar__nav {
@@ -269,10 +281,13 @@
 
 .footer__col ul {
   display: grid;
-  gap: 10px;
+  gap: 0;
 }
 
 .footer__col a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: var(--text-2);
   font-size: 0.93rem;
   transition: color var(--dur-2);

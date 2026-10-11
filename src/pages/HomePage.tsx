@@ -86,14 +86,12 @@ function Hero() {
             <IconMapPin size={16} stroke={1.75} aria-hidden="true" />
             {site.serviceArea}
           </FadeIn>
-          <TextEffect as="h1" className="t-display home-hero__title" per={0.08}>
-            Stay. Relax. Celebrate.
-          </TextEffect>
-          <FadeIn inView={false} delay={0.25}>
-            <p className="t-lead home-hero__lead">
-              Farm houses, villas, party and event spaces in and around {site.city}.
-            </p>
+          <FadeIn inView={false}>
+            <p className="home-hero__caption">{site.tagline}</p>
           </FadeIn>
+          <TextEffect as="h1" className="home-hero__title" delay={0.05}>
+            What are you looking for today?
+          </TextEffect>
           <FadeIn inView={false} delay={0.35} className="home-hero__search">
             <HomeSearch />
           </FadeIn>

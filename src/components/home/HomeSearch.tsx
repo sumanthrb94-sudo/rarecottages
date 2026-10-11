@@ -48,7 +48,8 @@ export function HomeSearch() {
   return (
     <form className="home-search" role="search" aria-label="Find a space" onSubmit={onSubmit}>
       <fieldset className="home-picker">
-        <legend className="home-picker__legend">What are you booking?</legend>
+        {/* The page heading above asks the question; the legend names the group for screen readers. */}
+        <legend className="visually-hidden">Choose a service</legend>
         <LayoutGroup id="home-picker">
           <div className="home-picker__grid">
             {categories.map((c) => {

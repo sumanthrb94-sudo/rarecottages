@@ -106,6 +106,8 @@
 .cat-head__icon {
   display: inline-grid;
   flex: none;
+  /* the tile is rotated a few degrees; inset so its corner sits on the content edge */
+  margin-inline-start: 4px;
 }
 
 .cat-head__icon .svc-icon {
