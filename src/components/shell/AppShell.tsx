@@ -205,9 +205,14 @@ function Footer() {
         <span>
           © {new Date().getFullYear()} {site.name}, {site.hq}
         </span>
-        <span>
-          Powered by: <strong>{site.poweredBy}</strong>
-        </span>
+        <a className="footer__credit" href={site.builtBy.url} target="_blank" rel="noreferrer">
+          Built with{' '}
+          <span className="footer__credit-brand">
+            <img src="/images/brand-mint-monogram.svg" alt="" width="20" height="20" />
+            {site.builtBy.name}
+          </span>
+          <span className="visually-hidden"> (opens in a new tab)</span>
+        </a>
       </div>
     </footer>
   );

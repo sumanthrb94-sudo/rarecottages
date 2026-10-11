@@ -51,7 +51,7 @@ All content lives in typed data files. Edit them without touching any components
 
 | File | What's in it |
 | --- | --- |
-| `src/config/site.ts` | Business name, **phone, WhatsApp number, email, Instagram**, service area, "Powered by" |
+| `src/config/site.ts` | Business name, **phone, WhatsApp number, email, Instagram**, service area, the "Built with" credit |
 | `src/data/listings.ts` | Spaces (`properties`) and their prices per service (`offers`) |
 | `src/data/addons.ts` | Add-ons (cake sizes, decor, photographer, make-up, catering, wedding photography partner) and packages |
 | `src/data/categories.ts` | The four services: names, blurbs, colour |

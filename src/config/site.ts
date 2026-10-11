@@ -16,7 +16,8 @@ export const site = {
   email: 'info@rarecottages.in',
   /** Instagram handle without "@". Leave empty to hide the link. */
   instagram: '',
-  poweredBy: 'Sumanth',
+  /** Website credit in the footer. */
+  builtBy: { name: 'Brand Mint', url: 'https://brandmintstudios.in' },
 } as const;
 
 export const telHref = `tel:${site.phoneE164}`;
