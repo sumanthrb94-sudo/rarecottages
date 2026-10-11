@@ -1,0 +1,330 @@
+{
+  "version": 1,
+  "about": "Shot list for Rare Cottages images. Generate each with Gemini at `aspect`, save to images-src/<name>.<shape>.png, then run `npm run images`. See docs/IMAGE-HANDOFF.md.",
+  "style": "Photorealistic hospitality photography, full-frame camera, 24-35mm lens, natural light, warm but true-to-life colours (no oversaturation, no HDR halos), clean uncluttered composition with breathing room. Setting: Rajahmundry, Andhra Pradesh, India, in the Godavari delta: coconut palms, banana plants, red Mangalore-tiled roofs, lush greenery, the wide Godavari river.",
+  "negative": "No text, letters, signage, logos, brand names or watermarks. No people facing the camera (people only small, from behind or out of focus). No distorted architecture, no fisheye, no cartoon or 3D-render look.",
+  "sizes": {
+    "card": "4:3 -> public/images/<name>-card-480.webp, -900.webp",
+    "wide": "generate 21:9, cropped to ~2.05:1 -> -wide-800.webp, -wide-1400.webp",
+    "square": "1:1 -> -square-480.webp, -900.webp"
+  },
+  "images": [
+    {
+      "name": "sample-riverbend-villa",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "night",
+      "label": "Riverbend Villa",
+      "usedBy": "src/data/samples.ts (sample-riverbend-villa.card)",
+      "prompt": "A modern two-storey villa with white walls and timber accents on the bank of the Godavari river, an infinity pool on the terrace that seems to merge with the river, sun loungers, warm lights coming on at golden hour"
+    },
+    {
+      "name": "sample-riverbend-villa",
+      "shape": "wide",
+      "aspect": "21:9",
+      "service": "night",
+      "label": "Riverbend Villa",
+      "usedBy": "src/data/samples.ts (sample-riverbend-villa.wide)",
+      "prompt": "Wide establishing view across the infinity pool towards the Godavari at sunset, villa on the left, palms framing the edges"
+    },
+    {
+      "name": "sample-palm-haven",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "night",
+      "label": "Palm Haven Farm Stay",
+      "usedBy": "src/data/samples.ts (sample-palm-haven.card)",
+      "prompt": "A traditional farmhouse with a red Mangalore-tiled roof and a wraparound verandah in a coconut grove, a private rectangular pool in front, two hammocks between palms, late-afternoon light"
+    },
+    {
+      "name": "sample-palm-haven",
+      "shape": "wide",
+      "aspect": "21:9",
+      "service": "night",
+      "label": "Palm Haven Farm Stay",
+      "usedBy": "src/data/samples.ts (sample-palm-haven.wide)",
+      "prompt": "Wide view of the coconut farm with the tiled-roof farmhouse and pool in the middle distance, soft morning mist"
+    },
+    {
+      "name": "sample-sunset-glasshouse",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "night",
+      "label": "Sunset Glasshouse",
+      "usedBy": "src/data/samples.ts (sample-sunset-glasshouse.card)",
+      "prompt": "A small glass-walled cottage with a black steel frame in a lush garden of frangipani trees, warm interior lights, a timber deck with a fire pit, golden hour"
+    },
+    {
+      "name": "sample-sunset-glasshouse",
+      "shape": "wide",
+      "aspect": "21:9",
+      "service": "night",
+      "label": "Sunset Glasshouse",
+      "usedBy": "src/data/samples.ts (sample-sunset-glasshouse.wide)",
+      "prompt": "Wide view of the glasshouse cottage glowing at blue hour with the garden and fire pit in front"
+    },
+    {
+      "name": "sample-azure-pool-lounge",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "hourly",
+      "label": "Azure Pool Lounge",
+      "usedBy": "src/data/samples.ts (sample-azure-pool-lounge.card)",
+      "prompt": "A shaded poolside lounge with white sun loungers, cream umbrellas and a small snack bar, turquoise pool, bright late-morning light"
+    },
+    {
+      "name": "sample-azure-pool-lounge",
+      "shape": "wide",
+      "aspect": "21:9",
+      "service": "hourly",
+      "label": "Azure Pool Lounge",
+      "usedBy": "src/data/samples.ts (sample-azure-pool-lounge.wide)",
+      "prompt": "Wide view of the pool deck with loungers in a row, palms behind, calm water reflections"
+    },
+    {
+      "name": "sample-skyline-deck",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "hourly",
+      "label": "Skyline Rooftop Deck",
+      "usedBy": "src/data/samples.ts (sample-skyline-deck.card)",
+      "prompt": "An open rooftop deck with warm string lights overhead, low lounge sofas with cushions, potted palms, a city skyline of low-rise buildings at dusk"
+    },
+    {
+      "name": "sample-skyline-deck",
+      "shape": "wide",
+      "aspect": "21:9",
+      "service": "hourly",
+      "label": "Skyline Rooftop Deck",
+      "usedBy": "src/data/samples.ts (sample-skyline-deck.wide)",
+      "prompt": "Wide view of the rooftop deck at dusk with string lights and the city lights beyond"
+    },
+    {
+      "name": "sample-lantern-garden",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "party",
+      "label": "Lantern Garden Cafe",
+      "usedBy": "src/data/samples.ts (sample-lantern-garden.card)",
+      "prompt": "A leafy garden cafe with paper lanterns strung between trees over long wooden tables set for a birthday, a small cake table with a simple balloon arch, evening"
+    },
+    {
+      "name": "sample-lantern-garden",
+      "shape": "wide",
+      "aspect": "21:9",
+      "service": "party",
+      "label": "Lantern Garden Cafe",
+      "usedBy": "src/data/samples.ts (sample-lantern-garden.wide)",
+      "prompt": "Wide view of the lantern-lit garden cafe with tables set for a party"
+    },
+    {
+      "name": "sample-neon-room",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "party",
+      "label": "The Neon Room",
+      "usedBy": "src/data/samples.ts (sample-neon-room.card)",
+      "prompt": "An indoor party hall with tasteful neon accent lighting in blue and pink, a DJ booth, a polished dance floor and a small stage for cake cutting, balloons at the edges, no visible text on neon"
+    },
+    {
+      "name": "sample-neon-room",
+      "shape": "wide",
+      "aspect": "21:9",
+      "service": "party",
+      "label": "The Neon Room",
+      "usedBy": "src/data/samples.ts (sample-neon-room.wide)",
+      "prompt": "Wide view of the party hall from the back, dance floor in the centre, DJ booth and stage ahead"
+    },
+    {
+      "name": "sample-riverfront-lawns",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "event",
+      "label": "Riverfront Lawns",
+      "usedBy": "src/data/samples.ts (sample-riverfront-lawns.card)",
+      "prompt": "A grand South Indian wedding mandap decorated with marigold and white flowers on a manicured riverside lawn, rows of chairs, the Godavari behind, evening lights"
+    },
+    {
+      "name": "sample-riverfront-lawns",
+      "shape": "wide",
+      "aspect": "21:9",
+      "service": "event",
+      "label": "Riverfront Lawns",
+      "usedBy": "src/data/samples.ts (sample-riverfront-lawns.wide)",
+      "prompt": "Wide aerial-style view of the riverside lawns set for a wedding: mandap, dining area and fairy-lit trees"
+    },
+    {
+      "name": "sample-heritage-courtyard",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "event",
+      "label": "Heritage Courtyard",
+      "usedBy": "src/data/samples.ts (sample-heritage-courtyard.card)",
+      "prompt": "A traditional pillared courtyard with carved wooden pillars and brass lamps, decorated in yellow marigolds for a haldi ceremony, low seating with cushions, warm daylight"
+    },
+    {
+      "name": "sample-heritage-courtyard",
+      "shape": "wide",
+      "aspect": "21:9",
+      "service": "event",
+      "label": "Heritage Courtyard",
+      "usedBy": "src/data/samples.ts (sample-heritage-courtyard.wide)",
+      "prompt": "Wide view of the heritage courtyard decorated for a sangeeth night with lights and drapes"
+    },
+    {
+      "name": "sample-luxury-suv",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "brand",
+      "label": "Luxury SUV",
+      "usedBy": "src/data/samples.ts (sample-luxury-suv.photo)",
+      "prompt": "A white seven-seater luxury SUV with no visible badges or logos, parked on a palm-lined road at golden hour, three-quarter front view"
+    },
+    {
+      "name": "sample-vintage-convertible",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "brand",
+      "label": "Vintage Convertible",
+      "usedBy": "src/data/samples.ts (sample-vintage-convertible.photo)",
+      "prompt": "A cream vintage convertible car with no visible badges, decorated with white flowers and ribbons for a wedding entry, outside a tiled-roof house"
+    },
+    {
+      "name": "sample-tempo-traveller",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "brand",
+      "label": "Tempo Traveller",
+      "usedBy": "src/data/samples.ts (sample-tempo-traveller.photo)",
+      "prompt": "A white twelve-seater passenger van with no visible badges or text, parked outside a garden wedding venue, clean side view"
+    },
+    {
+      "name": "sample-anniversary",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "party",
+      "label": "Anniversary Package",
+      "usedBy": "src/data/samples.ts (sample-anniversary.image)",
+      "prompt": "A candlelit dinner table for two beside a pool at night, rose petals, a small cake, soft fairy lights"
+    },
+    {
+      "name": "sample-bride-to-be",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "party",
+      "label": "Bride-to-be Package",
+      "usedBy": "src/data/samples.ts (sample-bride-to-be.image)",
+      "prompt": "Bride-to-be party decor in blush and white: balloon arch, floral backdrop, a two-tier cake on a table, no text on banners"
+    },
+    {
+      "name": "sample-baby-shower",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "party",
+      "label": "Baby Shower Package",
+      "usedBy": "src/data/samples.ts (sample-baby-shower.image)",
+      "prompt": "Pastel baby shower setup: soft balloon garland, floral backdrop, a dessert table with a small cake, no text"
+    },
+    {
+      "name": "sample-team-day-out",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "event",
+      "label": "Team Day-out Package",
+      "usedBy": "src/data/samples.ts (sample-team-day-out.image)",
+      "prompt": "A team lunch setup on a garden lawn: long tables with white linen, a buffet counter, a small projector screen under a canopy"
+    }
+  ],
+  "optional": [
+    {
+      "name": "category-night-stay",
+      "shape": "wide",
+      "aspect": "21:9",
+      "service": "night",
+      "label": "Night Stay mood",
+      "usedBy": "src/data/categories.ts (night-stay.image)",
+      "prompt": "A private villa pool at blue hour with warm lights, coconut palms silhouetted, calm and inviting",
+      "optional": true
+    },
+    {
+      "name": "category-hourly-stay",
+      "shape": "wide",
+      "aspect": "21:9",
+      "service": "hourly",
+      "label": "Hourly Stay mood",
+      "usedBy": "src/data/categories.ts (hourly-stay.image)",
+      "prompt": "A bright poolside lounge at midday with loungers and umbrellas, relaxed and airy",
+      "optional": true
+    },
+    {
+      "name": "category-party-space",
+      "shape": "wide",
+      "aspect": "21:9",
+      "service": "party",
+      "label": "Party Space mood",
+      "usedBy": "src/data/categories.ts (party-space.image)",
+      "prompt": "A birthday party setup in a garden cafe: balloon garland, cake table, warm string lights, no text",
+      "optional": true
+    },
+    {
+      "name": "category-event-space",
+      "shape": "wide",
+      "aspect": "21:9",
+      "service": "event",
+      "label": "Event Space mood",
+      "usedBy": "src/data/categories.ts (event-space.image)",
+      "prompt": "A South Indian wedding mandap with marigold decor at dusk, warm lights, elegant and grand",
+      "optional": true
+    },
+    {
+      "name": "addon-cake",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "brand",
+      "label": "Cake",
+      "usedBy": "src/data/addons.ts (cake.image)",
+      "prompt": "A two-tier celebration cake with fresh flowers on a marble table, soft daylight, shallow depth of field",
+      "optional": true
+    },
+    {
+      "name": "addon-decor",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "brand",
+      "label": "Decors",
+      "usedBy": "src/data/addons.ts (decor.image)",
+      "prompt": "Balloon garland and floral backdrop for a birthday, pastel and gold, no text",
+      "optional": true
+    },
+    {
+      "name": "addon-photographer",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "brand",
+      "label": "Photographer & reels",
+      "usedBy": "src/data/addons.ts (photographer.image)",
+      "prompt": "A photographer with a camera and a phone gimbal at a garden party, seen from behind, bokeh fairy lights",
+      "optional": true
+    },
+    {
+      "name": "addon-makeup",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "brand",
+      "label": "Make-up",
+      "usedBy": "src/data/addons.ts (makeup.image)",
+      "prompt": "A bridal make-up table with brushes, jewellery and a mirror with bulbs, no faces",
+      "optional": true
+    },
+    {
+      "name": "addon-catering",
+      "shape": "card",
+      "aspect": "4:3",
+      "service": "brand",
+      "label": "Catering",
+      "usedBy": "src/data/addons.ts (catering.image)",
+      "prompt": "A South Indian banquet buffet: banana leaves, brass vessels, rice, curries and sweets, warm light",
+      "optional": true
+    }
+  ]
+}

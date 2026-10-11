@@ -75,6 +75,11 @@ function AddOnCard({ addOn, targeted }: { addOn: AddOn; targeted: boolean }) {
       whileTap={{ scale: 0.985 }}
       transition={spring}
     >
+      {addOn.image && (
+        <div className="info-addon__media">
+          <img src={addOn.image.src} srcSet={addOn.image.srcSet} sizes="(min-width: 900px) 380px, 92vw" width={addOn.image.width} height={addOn.image.height} alt={addOn.image.alt} loading="lazy" decoding="async" />
+        </div>
+      )}
       <div className="info-addon__top">
         <span className="info-tile info-tile--lg" aria-hidden="true">
           <Icon size={26} stroke={1.6} />

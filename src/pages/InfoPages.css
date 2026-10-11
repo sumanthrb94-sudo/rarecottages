@@ -862,3 +862,30 @@
 .info-404 .btn {
   margin-top: 8px;
 }
+
+/* Car and add-on photos (optional; shown when the data has one). */
+.info-car__media,
+.info-addon__media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r-lg);
+  background: var(--surface);
+}
+
+.info-car__media {
+  margin-bottom: 4px;
+}
+
+.info-car__media img,
+.info-addon__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info-car__seats {
+  font-weight: 500;
+  color: var(--text-2);
+  font-size: 0.7em;
+}

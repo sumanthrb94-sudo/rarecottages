@@ -13,6 +13,12 @@ export interface Photo {
   width: number;
   height: number;
   alt: string;
+  /**
+   * True for AI-generated or stock images that do not show this exact place.
+   * Listing cards and space pages then show a "Representative image" badge.
+   * Required for any non-real photo used on a property.
+   */
+  representative?: boolean;
 }
 
 export interface Property {
@@ -28,6 +34,8 @@ export interface Property {
   card: Photo;
   /** Wide (about 2:1) photo for the space page hero, when we have one. */
   wide?: Photo;
+  /** Demo-only sample listing (src/data/samples.ts). Never shipped to the live site. */
+  sample?: boolean;
 }
 
 export interface Offer {
@@ -61,6 +69,8 @@ export interface AddOn {
   includes?: string[];
   partner?: { name: string; logo: Photo };
   appliesTo: CategorySlug[];
+  /** Optional 4:3 photo shown on the add-on card. */
+  image?: Photo;
 }
 
 export interface Package {
@@ -70,6 +80,10 @@ export interface Package {
   price: number;
   includes: string[];
   appliesTo: CategorySlug[];
+  /** Optional 4:3 photo shown on the package card. */
+  image?: Photo;
+  /** Demo-only sample package. */
+  sample?: boolean;
 }
 
 export interface Car {
@@ -77,4 +91,10 @@ export interface Car {
   name: string;
   description: string;
   goodFor: string[];
+  /** Seats, when known. */
+  seats?: number;
+  /** 4:3 photo of the car. */
+  photo?: Photo;
+  /** Demo-only sample car. */
+  sample?: boolean;
 }

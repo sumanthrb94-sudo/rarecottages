@@ -9,3 +9,7 @@ coverage
 .vscode/*
 !.vscode/extensions.json
 npm-debug.log*
+
+# Gemini / design source images (large); only the optimised webp in public/images is committed
+images-src/
+dist-demo

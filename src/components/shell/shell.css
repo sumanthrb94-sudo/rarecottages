@@ -9,6 +9,16 @@
   outline: none;
 }
 
+/* Demo / pitch builds only (VITE_DEMO=1). */
+.demo-ribbon {
+  margin: 0;
+  padding: 6px var(--gutter);
+  background: var(--inverse);
+  color: var(--on-inverse);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
 /* Holds the space while a lazily loaded page arrives, so the footer doesn't jump up. */
 .app__loading {
   min-height: 100dvh;

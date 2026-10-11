@@ -577,3 +577,20 @@
     display: block;
   }
 }
+
+/* Demo-only sample listing pill, next to the service tags. */
+.sp-sample {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: var(--r-pill);
+  border: 1px dashed var(--border-strong);
+  color: var(--text-2);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.sp-hero__badge {
+  left: 16px;
+  bottom: 16px;
+}

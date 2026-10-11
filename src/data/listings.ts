@@ -6,7 +6,7 @@ import type { CategorySlug, Offer, Property } from './types';
  * fields the mockups did not specify are left out rather than guessed, and the
  * UI shows "ask us" instead.
  */
-export const properties: Property[] = [
+const realProperties: Property[] = [
   {
     id: 'br-farm-house',
     name: 'B.R Farm House',
@@ -69,7 +69,7 @@ export const properties: Property[] = [
   },
 ];
 
-export const offers: Offer[] = [
+const realOffers: Offer[] = [
   { id: 'br-farm-night', propertyId: 'br-farm-house', category: 'night-stay', price: 15000, unit: 'night' },
   { id: 'triangle-night', propertyId: 'into-the-triangle', category: 'night-stay', price: 18000, unit: 'night' },
   { id: 'seera-night', propertyId: 'seera-studio-space', category: 'night-stay', price: 25000, unit: 'night' },
@@ -80,6 +80,13 @@ export const offers: Offer[] = [
   { id: 'seera-event', propertyId: 'seera-studio-space', category: 'event-space', price: 30000, unit: 'event', durationHours: 15, capacity: { min: 100, max: 250 } },
   { id: 'palm-grove-event', propertyId: 'palm-grove', category: 'event-space', price: 35000, unit: 'event', capacity: { min: 10, max: 80 } },
 ];
+
+// Demo builds load the sample catalogue; in production `__DEMO__` is false and this import is dropped.
+const samples = __DEMO__ ? await import('./samples') : null;
+
+/** Live listings, plus the sample catalogue in demo builds. */
+export const properties: Property[] = samples ? [...realProperties, ...samples.sampleProperties] : realProperties;
+export const offers: Offer[] = samples ? [...realOffers, ...samples.sampleOffers] : realOffers;
 
 const propertyById = new Map(properties.map((p) => [p.id, p]));
 

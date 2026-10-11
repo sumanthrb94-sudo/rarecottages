@@ -54,7 +54,7 @@ export const addOns: AddOn[] = [
   },
 ];
 
-export const packages: Package[] = [
+const realPackages: Package[] = [
   {
     id: 'birthday',
     title: ['Birthday', 'Package'],
@@ -63,6 +63,11 @@ export const packages: Package[] = [
     appliesTo: ['party-space', 'hourly-stay'],
   },
 ];
+
+const samples = __DEMO__ ? await import('./samples') : null;
+
+/** Live packages, plus sample packages in demo builds. */
+export const packages: Package[] = samples ? [...realPackages, ...samples.samplePackages] : realPackages;
 
 export function addOnsFor(category: CategorySlug): AddOn[] {
   return addOns.filter((a) => a.appliesTo.includes(category));

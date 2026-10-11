@@ -30,7 +30,7 @@ import {
   type Icon,
 } from '../components/ui/icons';
 import { FadeIn, SlidingNumber, Stagger, StaggerItem, TextEffect, easeOut } from '../components/ui/motion';
-import { Button, SectionHeader, ServiceIcon, ServiceTag, serviceTheme } from '../components/ui/primitives';
+import { Button, MediaBadge, SectionHeader, ServiceIcon, ServiceTag, serviceTheme } from '../components/ui/primitives';
 import { DESKTOP_QUERY, Sheet, useMediaQuery } from '../components/ui/Sheet';
 import { site } from '../config/site';
 import { getCategory, unitLabel } from '../data/categories';
@@ -153,6 +153,7 @@ function Space({ property }: { property: Property }) {
               {services.map((slug) => (
                 <ServiceTag key={slug} slug={slug} label={getCategory(slug)!.name} className="sp-tag" />
               ))}
+              {property.sample && <span className="sp-sample">Sample listing</span>}
             </FadeIn>
             <TextEffect as="h1" className="t-h1 sp-title__name" delay={0.05}>
               {property.name}
@@ -328,6 +329,7 @@ function Hero({ property }: { property: Property }) {
           animate={{ scale: 1 }}
           transition={{ duration: 1.1, ease: easeOut }}
         />
+        <MediaBadge sample={property.sample} representative={photo.representative} className="sp-hero__badge" />
       </motion.div>
     </div>
   );

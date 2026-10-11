@@ -1,4 +1,4 @@
-import type { CategorySlug, PriceUnit, Theme } from './types';
+import type { CategorySlug, Photo, PriceUnit, Theme } from './types';
 
 export interface Category {
   slug: CategorySlug;
@@ -7,6 +7,8 @@ export interface Category {
   blurb: string;
   /** Short line for the home page tiles and menus. */
   hint: string;
+  /** Optional wide mood photo shown under the service page title. */
+  image?: Photo;
 }
 
 /**

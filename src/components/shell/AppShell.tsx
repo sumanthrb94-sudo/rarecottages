@@ -1,6 +1,7 @@
 import { LayoutGroup, motion } from 'motion/react';
 import { Suspense, useEffect } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { DEMO } from '../../config/demo';
 import { mailHref, site, telHref } from '../../config/site';
 import { categories } from '../../data/categories';
 import type { CategorySlug } from '../../data/types';
@@ -276,6 +277,11 @@ export function AppShell() {
         Skip to content
       </a>
       <ScrollToTop />
+      {DEMO && (
+        <p className="demo-ribbon">
+          Preview · includes <strong>sample</strong> listings
+        </p>
+      )}
       <TopBar />
       <main id="main" tabIndex={-1} className="app__main">
         <Suspense fallback={<div className="app__loading" aria-hidden="true" />}>

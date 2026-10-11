@@ -59,11 +59,14 @@ const steps = [
   { title: 'Confirm on WhatsApp', text: 'Send your plan in one tap. We confirm the date and the final quote.' },
 ];
 
-/** One card per property, showing its first offer. */
-const popular = properties.flatMap((property) => {
-  const offer = offersForProperty(property.id)[0];
-  return offer ? [{ property, offer }] : [];
-});
+/** One card per property, showing its first offer; capped so the grid stays tidy as listings grow. */
+const POPULAR_LIMIT = 8;
+const popular = properties
+  .flatMap((property) => {
+    const offer = offersForProperty(property.id)[0];
+    return offer ? [{ property, offer }] : [];
+  })
+  .slice(0, POPULAR_LIMIT);
 
 const tilts = [-8, 7, -6, 8];
 

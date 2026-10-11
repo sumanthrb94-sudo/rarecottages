@@ -740,3 +740,18 @@
   font-size: 0.9rem;
   font-weight: 600;
 }
+
+/* Optional service mood image (categories.ts `image`). */
+.cat-head__media {
+  margin-top: 18px;
+  overflow: hidden;
+  aspect-ratio: 21 / 9;
+  border-radius: var(--r-xl);
+  background: var(--surface);
+}
+
+.cat-head__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

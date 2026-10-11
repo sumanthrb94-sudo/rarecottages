@@ -204,6 +204,16 @@ export function ThemeToggle({ className = '' }: { className?: string }) {
   );
 }
 
+/**
+ * Small overlay label for photos: "Sample" for demo listings, "Representative image"
+ * for AI or stock photos that don't show the actual place. Place inside a
+ * position:relative media box.
+ */
+export function MediaBadge({ sample, representative, className = '' }: { sample?: boolean; representative?: boolean; className?: string }) {
+  if (!sample && !representative) return null;
+  return <span className={`media-badge ${className}`}>{sample ? 'Sample' : 'Representative image'}</span>;
+}
+
 export function SectionHeader({
   title,
   eyebrow,

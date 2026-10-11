@@ -88,6 +88,16 @@ export function CategoryPage({ slug }: { slug: CategorySlug }) {
         >
           {category.blurb}
         </motion.p>
+        {category.image && (
+          <motion.div
+            className="cat-head__media"
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, ease: easeOut, delay: 0.22 }}
+          >
+            <img src={category.image.src} srcSet={category.image.srcSet} sizes="(min-width: 1200px) 1200px, 100vw" width={category.image.width} height={category.image.height} alt={category.image.alt} fetchPriority="high" decoding="async" />
+          </motion.div>
+        )}
       </header>
 
       <LayoutGroup id="cat-results">

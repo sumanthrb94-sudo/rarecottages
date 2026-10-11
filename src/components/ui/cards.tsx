@@ -6,7 +6,7 @@ import type { CategorySlug, Offer, Package, Property } from '../../data/types';
 import { whatsappLink } from '../../lib/enquiry';
 import { formatINR } from '../../lib/format';
 import { IconBrandWhatsapp, IconCheck, IconPool, IconUsers } from './icons';
-import { Button, ServiceTag, serviceTheme } from './primitives';
+import { Button, MediaBadge, ServiceTag, serviceTheme } from './primitives';
 import './ui.css';
 
 export function spaceHref(property: Property, category: CategorySlug, query = '') {
@@ -65,6 +65,7 @@ export function SpaceCard({
             decoding="async"
           />
           <ServiceTag slug={tagSlug} label={tagCategory.name} className="space-card__tag" />
+          <MediaBadge sample={property.sample} representative={property.card.representative} />
         </div>
         <div className="space-card__body">
           <div className="space-card__row">
@@ -98,6 +99,12 @@ export function PackageCard({ pkg, service = 'party' }: { pkg: Package; service?
   const name = pkg.title.join(' ');
   return (
     <article className="pkg-card" data-service={service}>
+      {pkg.image && (
+        <div className="pkg-card__media">
+          <img src={pkg.image.src} srcSet={pkg.image.srcSet} sizes="(min-width: 900px) 480px, 90vw" width={pkg.image.width} height={pkg.image.height} alt={pkg.image.alt} loading="lazy" decoding="async" />
+          <MediaBadge sample={pkg.sample} representative={pkg.image.representative} />
+        </div>
+      )}
       <div className="pkg-card__head">
         <div>
           <p className="t-eyebrow t-svc">Package</p>

@@ -60,6 +60,24 @@ All content lives in typed data files. Edit them without touching any components
 
 A space can be listed under several services with different prices. For example, Seera Studio Space is ₹25,000 per night as a Night Stay and ₹30,000 per event as an Event Space. Any offer priced per hour also appears under Hourly Stay.
 
+### Pitch / demo build
+
+`npm run dev:demo` / `npm run build:demo` adds a **sample catalogue** to show the full product, for example to investors:
+
+- 9 more spaces across the four services
+- 3 cars
+- 4 packages
+
+The data is in `src/data/samples.ts`. Every sample is badged **Sample**, and a "Preview" ribbon sits on top. The live build never includes samples: they're dropped at compile time, and a test checks it.
+
+To host it, add `VITE_DEMO=1` to a separate Vercel project, or a `pitch` preview branch.
+
+### Images
+
+`npm run images` turns source images in `images-src/<name>.<card|wide|square>.png` into the site's optimised WebP sizes in `public/images/`. AI-generated images for the demo follow **[docs/IMAGE-HANDOFF.md](docs/IMAGE-HANDOFF.md)**, which has prompts per image in `docs/image-shotlist.json`. Branded placeholders stand in until each render is done (`npm run images -- --check`).
+
+AI images never stand in for a real property unless the photo is marked `representative: true`, which shows a badge.
+
 ### Before launch
 
 - [ ] Replace the placeholder phone, WhatsApp and email in `src/config/site.ts`. WhatsApp links go nowhere until this is done, and the dev server logs a warning.
@@ -74,7 +92,9 @@ Requires Node 20.19+.
 ```bash
 npm install
 npm run dev        # http://localhost:5173
-npm test           # unit tests: filters, pricing, WhatsApp message
+npm run dev:demo   # same, with the sample catalogue (pitch build)
+npm test           # unit tests: filters, pricing, WhatsApp message, images, samples
+npm run images     # optimise images-src/* into public/images/*.webp
 npm run typecheck
 npm run build      # production build in dist/
 npm run preview    # serve the production build

@@ -3,7 +3,7 @@ import { IconTile, ListRow } from '../components/info/InfoParts';
 import { TextField, DateField, SelectField } from '../components/ui/forms';
 import { IconBrandWhatsapp, IconGift, IconInfoCircle } from '../components/ui/icons';
 import { FadeIn } from '../components/ui/motion';
-import { Button, ServiceIcon } from '../components/ui/primitives';
+import { Button, MediaBadge, ServiceIcon } from '../components/ui/primitives';
 import { site } from '../config/site';
 import { cars } from '../data/cars';
 import { getCategory } from '../data/categories';
@@ -73,8 +73,15 @@ export function CarsPage() {
           {cars.map((c) => (
             <FadeIn key={c.id}>
               <article className="info-car" aria-labelledby={`car-${c.id}`}>
+                {c.photo && (
+                  <div className="info-car__media">
+                    <img src={c.photo.src} srcSet={c.photo.srcSet} sizes="(min-width: 900px) 560px, 92vw" width={c.photo.width} height={c.photo.height} alt={c.photo.alt} loading="lazy" decoding="async" />
+                    <MediaBadge sample={c.sample} representative={c.photo.representative} />
+                  </div>
+                )}
                 <h2 className="t-h2" id={`car-${c.id}`}>
                   {c.name}
+                  {c.seats && <span className="info-car__seats"> · {c.seats} seats</span>}
                 </h2>
                 <p className="t-body">{c.description}</p>
                 <div className="info-car__good">
